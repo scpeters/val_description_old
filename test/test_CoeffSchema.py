@@ -69,33 +69,18 @@ class coeffFileTests(unittest.TestCase):
                 self.incorrectFiles.append(coeffFile)
         assert len(self.incorrectFiles) == 0
 
-    def checkValidSchemaExcludeHClass(self, schema, directory):
+    def checkValidSchema(self, schema, directory, checkOnlyHClass=False):
         parser = self.getSchemaParser(schema)
         os.chdir(directory)
         for coeffFile in glob.glob("*.xml"):
-            if 'test' not in coeffFile and 'v_h_' not in coeffFile:  # Don't check the test files and exclude class h
-                print coeffFile
-                try:
-                    root = xmlParser.parse(coeffFile, parser)
-                    self.correctFiles.append(coeffFile)
-                except xmlParser.XMLSyntaxError:
-                    self.log.error(coeffFile + " has coeffs that are not in the schema")
-                    self.incorrectFiles.append(coeffFile)
-
-        assert len(self.incorrectFiles) == 0
-
-    def checkValidSchemaForHClass(self, schema, directory):
-        parser = self.getSchemaParser(schema)
-        os.chdir(directory)
-        for coeffFile in glob.glob("*.xml"):
-            if 'test' not in coeffFile and 'v_h_' in coeffFile:  # Don't check the test files and exclude class h
-                print coeffFile
-                try:
-                    root = xmlParser.parse(coeffFile, parser)
-                    self.correctFiles.append(coeffFile)
-                except xmlParser.XMLSyntaxError:
-                    self.log.error(coeffFile + " has coeffs that are not in the schema")
-                    self.incorrectFiles.append(coeffFile)
+            if 'test' not in coeffFile:  # Don't check the test files
+                if checkOnlyHClass and 'v_h_' in coeffFile or not checkOnlyHClass and 'v_h_' not in coeffFile:
+                    try:
+                        root = xmlParser.parse(coeffFile, parser)
+                        self.correctFiles.append(coeffFile)
+                    except xmlParser.XMLSyntaxError:
+                        self.log.error(coeffFile + " has coeffs that are not in the schema")
+                        self.incorrectFiles.append(coeffFile)
 
         assert len(self.incorrectFiles) == 0
 
@@ -105,21 +90,22 @@ class coeffFileTests(unittest.TestCase):
     def testActuatorCoeffsValidSchema(self):
         # Assemble the schema
         schemaNoClassH = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.actuator_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.actuator_coeff_files_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-        self.checkValidSchemaExcludeHClass(schemaNoClassH, self.actuatorCoeffDirectory)
+        self.checkValidSchema(schemaNoClassH, self.actuatorCoeffDirectory)
 
-        # schemaForClassH = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.athena_actuator_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.actuator_coeff_files_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+        schemaForClassH = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.athena_actuator_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+        self.checkValidSchema(schemaForClassH, self.actuatorCoeffDirectory, True)
 
-    # ####################################################################################
-    # #    Check that actuator coeff files have no duplicate coeffs.                     #
-    # ####################################################################################
-    # def testActuatorNoDuplicateCoeffs(self):
-    #     self.checkForDuplicates(self.actuatorCoeffDirectory)
+    ####################################################################################
+    #    Check that actuator coeff files have no duplicate coeffs.                     #
+    ####################################################################################
+    def testActuatorNoDuplicateCoeffs(self):
+        self.checkForDuplicates(self.actuatorCoeffDirectory)
 
-    # ####################################################################################
-    # #    Check that actuator coeff files have coeffs that need to be in them.          #
-    # ####################################################################################
-    # def testActuatorEssentialCoeffs(self):
-    #     self.checkForNeeded(self.actuatorCoeffDirectory, coeffCollectionDefinitions.ActuatorNeededCoeffs)
+    ####################################################################################
+    #    Check that actuator coeff files have coeffs that need to be in them.          #
+    ####################################################################################
+    def testActuatorEssentialCoeffs(self):
+        self.checkForNeeded(self.actuatorCoeffDirectory, coeffCollectionDefinitions.ActuatorNeededCoeffs)
 
     # ####################################################################################
     # #    Check that class coeff files only have coeffs that should be in them.         #

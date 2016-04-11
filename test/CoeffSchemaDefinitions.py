@@ -41,7 +41,7 @@ athena_actuator_coeffs_definition = \
         <xs:enumeration value="Yaw_offset"/>
         <xs:enumeration value="Pitch_hilmt"/>
         <xs:enumeration value="Pitch_lolmt"/>
-        <xs:enumeration value= id="Pitch_cnvtrad"/>
+        <xs:enumeration value="Pitch_cnvtrad"/>
         <xs:enumeration value="Yaw_hilmt"/>
         <xs:enumeration value="Yaw_lolmt"/>
         <xs:enumeration value="Yaw_cnvtrad"/>
