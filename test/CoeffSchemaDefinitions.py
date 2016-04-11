@@ -33,6 +33,80 @@ actuator_coeffs_definition = \
 </xs:simpleType>
 '''
 
+athena_actuator_coeffs_definition = \
+    '''
+<xs:simpleType name="ValidCoeffs">
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="Pitch_offset"/>
+        <xs:enumeration value="Yaw_offset"/>
+        <xs:enumeration value="Pitch_hilmt"/>
+        <xs:enumeration value="Pitch_lolmt"/>
+        <xs:enumeration value= id="Pitch_cnvtrad"/>
+        <xs:enumeration value="Yaw_hilmt"/>
+        <xs:enumeration value="Yaw_lolmt"/>
+        <xs:enumeration value="Yaw_cnvtrad"/>
+        <xs:enumeration value="thumb_hicmdlmt"/>
+        <xs:enumeration value="thumb_locmdlmt"/>
+        <xs:enumeration value="thumb_posKP"/>
+        <xs:enumeration value="thumb_posKD"/>
+        <xs:enumeration value="thumb_dutylmt"/>
+        <xs:enumeration value="WL_Torq_KP"/>
+        <xs:enumeration value="WL_Torq_KD"/>
+        <xs:enumeration value="WL_hiposcmdlmt"/>
+        <xs:enumeration value="WL_loposcmdlmt"/>
+        <xs:enumeration value="WL_hivelcmdlmt"/>
+        <xs:enumeration value="WL_lovelcmdlmt"/>
+        <xs:enumeration value="WL_posKP"/>
+        <xs:enumeration value="WL_posKD"/>
+        <xs:enumeration value="WL_dutylmt"/>
+        <xs:enumeration value="Fing3_elecoffset"/>
+        <xs:enumeration value="Fing3_locmdlmt"/>
+        <xs:enumeration value="Fing3_hicmdlmt"/>
+        <xs:enumeration value="Fing3_posKP"/>
+        <xs:enumeration value="Fing3_posKD"/>
+        <xs:enumeration value="Fing3_dutylmt"/>
+        <xs:enumeration value="Fing3_APSoffset"/>
+        <xs:enumeration value="WR_Torq_KP"/>
+        <xs:enumeration value="WR_Torq_KD"/>
+        <xs:enumeration value="WR_hiposcmdlmt"/>
+        <xs:enumeration value="WR_loposcmdlmt"/>
+        <xs:enumeration value="WR_hivelcmdlmt"/>
+        <xs:enumeration value="WR_lovelcmdlmt"/>
+        <xs:enumeration value="WR_posKP"/>
+        <xs:enumeration value="WR_posKD"/>
+        <xs:enumeration value="WR_dutylmt"/>
+        <xs:enumeration value="Fing1_elecoffset"/>
+        <xs:enumeration value="Fing1_locmdlmt"/>
+        <xs:enumeration value="Fing1_hicmdlmt"/>
+        <xs:enumeration value="Fing1_posKP"/>
+        <xs:enumeration value="Fing1_posKD"/>
+        <xs:enumeration value="Fing1_dutylmt"/>
+        <xs:enumeration value="Fing1_APSoffset"/>
+        <xs:enumeration value="Fing2_elecoffset"/>
+        <xs:enumeration value="Fing2_locmdlmt"/>
+        <xs:enumeration value="Fing2_hicmdlmt"/>
+        <xs:enumeration value="Fing2_posKP"/>
+        <xs:enumeration value="Fing2_posKD"/>
+        <xs:enumeration value="Fing2_dutylmt"/>
+        <xs:enumeration value="Fing2_APSoffset"/>
+        <xs:enumeration value="Fing3_elecoffset"/>
+        <xs:enumeration value="Fing3_locmdlmt"/>
+        <xs:enumeration value="Fing3_hicmdlmt"/>
+        <xs:enumeration value="Fing3_posKP"/>
+        <xs:enumeration value="Fing3_posKD"/>
+        <xs:enumeration value="Fing3_dutylmt"/>
+        <xs:enumeration value="Fing3_APSoffset"/>
+        <xs:enumeration value="Fing4_elecoffset"/>
+        <xs:enumeration value="Fing4_locmdlmt"/>
+        <xs:enumeration value="Fing4_hicmdlmt"/>
+        <xs:enumeration value="Fing4_posKP"/>
+        <xs:enumeration value="Fing4_posKD"/>
+        <xs:enumeration value="Fing4_dutylmt"/>
+        <xs:enumeration value="Fing4_APSoffset"/>
+    </xs:restriction>
+</xs:simpleType>
+'''
+
 class_coeffs_definition = \
     '''
 <xs:simpleType name="ValidCoeffs">

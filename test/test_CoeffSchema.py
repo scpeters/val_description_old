@@ -69,11 +69,27 @@ class coeffFileTests(unittest.TestCase):
                 self.incorrectFiles.append(coeffFile)
         assert len(self.incorrectFiles) == 0
 
-    def checkValidSchema(self, schema, directory):
+    def checkValidSchemaExcludeHClass(self, schema, directory):
         parser = self.getSchemaParser(schema)
         os.chdir(directory)
         for coeffFile in glob.glob("*.xml"):
-            if 'test' not in coeffFile:  # Don't check the test files
+            if 'test' not in coeffFile and 'v_h_' not in coeffFile:  # Don't check the test files and exclude class h
+                print coeffFile
+                try:
+                    root = xmlParser.parse(coeffFile, parser)
+                    self.correctFiles.append(coeffFile)
+                except xmlParser.XMLSyntaxError:
+                    self.log.error(coeffFile + " has coeffs that are not in the schema")
+                    self.incorrectFiles.append(coeffFile)
+
+        assert len(self.incorrectFiles) == 0
+
+    def checkValidSchemaForHClass(self, schema, directory):
+        parser = self.getSchemaParser(schema)
+        os.chdir(directory)
+        for coeffFile in glob.glob("*.xml"):
+            if 'test' not in coeffFile and 'v_h_' in coeffFile:  # Don't check the test files and exclude class h
+                print coeffFile
                 try:
                     root = xmlParser.parse(coeffFile, parser)
                     self.correctFiles.append(coeffFile)
@@ -88,8 +104,10 @@ class coeffFileTests(unittest.TestCase):
     ####################################################################################
     def testActuatorCoeffsValidSchema(self):
         # Assemble the schema
-        schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.actuator_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.actuator_coeff_files_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-        self.checkValidSchema(schema, self.actuatorCoeffDirectory)
+        schemaNoClassH = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.actuator_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.actuator_coeff_files_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+        self.checkValidSchemaExcludeHClass(schemaNoClassH, self.actuatorCoeffDirectory)
+
+        # schemaForClassH = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.athena_actuator_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.actuator_coeff_files_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
 
     # ####################################################################################
     # #    Check that actuator coeff files have no duplicate coeffs.                     #
