@@ -3,6 +3,7 @@
   <Processor id="linear/turbo_bootloader.bin" />
   <ScheduleFile id="turbo_linear.yaml" />
   <Coeffs>
+    <Coeff id="JointTorqueLimit_Nm" value="350.0"/>
     <Coeff id="CurrentSafeLimit" value="17.0"/>
     <Coeff id="EncoderCPR" value="442.0"/>
     <Coeff id="FluxLinkage" value="0.0"/>
