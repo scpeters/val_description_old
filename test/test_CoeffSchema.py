@@ -168,17 +168,17 @@ class coeffFileTests(unittest.TestCase):
             for controllerFile in coeffCollectionDefinitions.AllowedControllerFiles[classLetterAsString]:
                 self.checkValidSchema(schema, self.controllerCoeffDirectory, controllerFile)
 
-        # ####################################################################################
-        # #    Check that controller coeff files have no duplicate coeffs.                   #
-        # ####################################################################################
-        # def testControllerNoDuplicateCoeffs(self):
-        #     self.checkForDuplicates(self.controllerCoeffDirectory)
+    ####################################################################################
+    #    Check that controller coeff files have no duplicate coeffs.                   #
+    ####################################################################################
+    def testControllerNoDuplicateCoeffs(self):
+        self.checkForDuplicates(self.controllerCoeffDirectory)
 
-        # ####################################################################################
-        # #    Check that controller coeff files have coeffs that need to be in them.        #
-        # ####################################################################################
-        # def testControllerEssentialCoeffs(self):
-        #     self.checkForNeeded(self.controllerCoeffDirectory, coeffCollectionDefinitions.ControllerNeededCoeffs)
+    # ####################################################################################
+    # #    Check that controller coeff files have coeffs that need to be in them.        #
+    # ####################################################################################
+    # def testControllerEssentialCoeffs(self):
+    #     self.checkForNeeded(self.controllerCoeffDirectory, coeffCollectionDefinitions.ControllerNeededCoeffs)
 
         # ####################################################################################
         # #    Check that location coeff files only have coeffs that should be in them.      #
