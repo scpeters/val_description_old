@@ -155,6 +155,8 @@ controller_coeffs_definition = \
     <xs:enumeration value="PositionControl_Kd"/>
     <xs:enumeration value="PositionControl_Kp"/>
     <xs:enumeration value="PositionControl_SensorFeedback"/>
+    <xs:enumeration value="SpaceVector_CurrentToSV"/>
+    <xs:enumeration value="SpaceVector_MaxNormVoltage"/>
     <xs:enumeration value="TorqueControl_Current2MotorTorque"/>
     <xs:enumeration value="TorqueControl_FFd_fc_Hz"/>
     <xs:enumeration value="TorqueControl_Kd"/>
@@ -173,6 +175,25 @@ controller_coeffs_definition = \
     <xs:enumeration value="TorqueControl_m"/>
     <xs:enumeration value="EffortControl_Alpha"/>
     <xs:enumeration value="EffortControl_AlphaDot"/>
+    <xs:enumeration value="EffortControl_OnlineTuning"/>
+
+    <xs:enumeration value="ForceControl_m"/>
+    <xs:enumeration value="ForceControl_b"/>
+    <xs:enumeration value="ForceControl_Current2MotorForce"/>
+    <xs:enumeration value="ForceControl_enableFF"/>
+    <xs:enumeration value="ForceControl_enablePID"/>
+    <xs:enumeration value="ForceControl_Kp"/>
+    <xs:enumeration value="ForceControl_Kd"/>
+    <xs:enumeration value="ForceControl_PD_damp"/>
+    <xs:enumeration value="ForceControl_autoKd"/>
+    <xs:enumeration value="ForceControl_Kd_fc_Hz"/>
+    <xs:enumeration value="ForceControl_dobWindupLimit_N"/>
+    <xs:enumeration value="ForceControl_dob_fc_Hz"/>
+    <xs:enumeration value="ForceControl_enableDOB"/>
+    <xs:enumeration value="ForceControl_FFd_fc_Hz"/>
+    <xs:enumeration value="ForceControl_enableDynFF"/>
+    <xs:enumeration value="ForceControl_ParallelDamping"/>
+    <xs:enumeration value="ForceControl_SensorFeedback"/>
   </xs:restriction>
 </xs:simpleType>
 '''

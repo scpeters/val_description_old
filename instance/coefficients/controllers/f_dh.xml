@@ -1,8 +1,4 @@
 <CoeffData>
-  <Properties>
-    <CalibrationDate/>
-    <FileGenDate date="2013-07-02" time="19:23:42.085597"/>
-  </Properties>
   <Coeffs>
     <!-- - - - - - - - - Filtering - - - - - - - - -->
     <Coeff description="" value="1000" id="JointVelFilter_fc_Hz"/>

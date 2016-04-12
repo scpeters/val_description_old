@@ -233,6 +233,17 @@ AllowedSensorFiles = {"a": "sensors.xml",
                       "f": "sensors.xml",
                       "g": "sensors_leonidas.xml"}
 
+AllowedControllerFiles = {"a": ["a_sv.xml", "a_dh.xml"],
+                          "b": ["b_sv.xml", "b_dh.xml"],
+                          "c": ["c_sv.xml", "c_dh.xml"],
+                          "d": ["d_sv.xml", "d_dh.xml"],
+                          "e": ["e_renishaw_sv.xml", "e_renishaw_dh.xml", "e_futek_sv.xml", "e_futek_dh.xml"],
+                          "f": ["f_sv.xml", "f_dh.xml"],
+                          "g": ["g_sv.xml", "g_dh.xml"],
+                          "h_athena1": [None],
+                          "h_athena2": [None]
+                          }
+
 ControllerNeededCoeffs = ["Commutation_Select"]
 
 LocationNeededCoeffs = []

@@ -94,7 +94,6 @@ class coeffFileTests(unittest.TestCase):
                     if coeff not in coeffNames:
                         raise Exception
             except Exception:
-                print classToCheck
                 self.log.error(coeffFile + " is missing a needed coeff " + coeff)
                 self.incorrectFiles.append(coeffFile)
         assert len(self.incorrectFiles) == 0
@@ -115,57 +114,59 @@ class coeffFileTests(unittest.TestCase):
 
         assert len(self.incorrectFiles) == 0
 
-    ###################################################################################
-    #   Check that actuator coeff files only have coeffs that should be in them.      #
-    ###################################################################################
-    def testActuatorCoeffsValidSchema(self):
-        # Assemble the schema
-        for classToCheck in classToCoeffFileDictionary:
-            schema = coeffSchemaDefinitions.schema_header + classToActuatorSchemaDictionary[classToCheck] + coeffSchemaDefinitions.header_coeff_definition + classToActuatorCoeffFilesSchemaDictionary[classToCheck] + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-            self.checkValidSchema(schema, self.actuatorCoeffDirectory, classToCoeffFileDictionary[classToCheck])
-
-    ###################################################################################
-    #   Check that actuator coeff files have no duplicate coeffs.                     #
-    ###################################################################################
-    def testActuatorNoDuplicateCoeffs(self):
-        self.checkForDuplicates(self.actuatorCoeffDirectory)
-
-    ####################################################################################
-    #    Check that actuator coeff files have coeffs that need to be in them.          #
-    ####################################################################################
-    def testActuatorEssentialCoeffs(self):
-        for classLetterAsString in classToCoeffFileDictionary:
-            self.checkForNeeded(self.actuatorCoeffDirectory, classLetterAsString, coeffCollectionDefinitions.ActuatorNeededCoeffs)
-
-    ####################################################################################
-    #    Check that class coeff files only have coeffs that should be in them.         #
-    ####################################################################################
-    def testClassCoeffsValidSchema(self):
-        # Assemble the schema
-        for classToCheck in classToCoeffFileDictionary:
-            schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.class_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.actuator_class_info_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-            self.checkValidSchema(schema, self.classCoeffDirectory, coeffCollectionDefinitions.AllowedClassFiles[classToCheck])
-
-    ####################################################################################
-    #    Check that class coeff files have no duplicate coeffs.                        #
-    ####################################################################################
-    def testClassNoDuplicateCoeffs(self):
-        self.checkForDuplicates(self.classCoeffDirectory)
-
-    ####################################################################################
-    #    Check that class coeff files have coeffs that need to be in them.             #
-    ####################################################################################
-    # def testClassEssentialCoeffs(self):
+    # ###################################################################################
+    # #   Check that actuator coeff files only have coeffs that should be in them.      #
+    # ###################################################################################
+    # def testActuatorCoeffsValidSchema(self):
+    #     # Assemble the schema
     #     for classToCheck in classToCoeffFileDictionary:
-    #         self.checkForNeeded(self.classCoeffDirectory, classToCheck)
+    #         schema = coeffSchemaDefinitions.schema_header + classToActuatorSchemaDictionary[classToCheck] + coeffSchemaDefinitions.header_coeff_definition + classToActuatorCoeffFilesSchemaDictionary[classToCheck] + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+    #         self.checkValidSchema(schema, self.actuatorCoeffDirectory, classToCoeffFileDictionary[classToCheck])
 
-        # ####################################################################################
-        # #    Check that controller coeff files only have coeffs that should be in them.    #
-        # ####################################################################################
-        # def testControllerCoeffsValidSchema(self):
-        #     # Assemble the schema
-        #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.controller_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-        #     self.checkValidSchema(schema, self.controllerCoeffDirectory)
+    # ###################################################################################
+    # #   Check that actuator coeff files have no duplicate coeffs.                     #
+    # ###################################################################################
+    # def testActuatorNoDuplicateCoeffs(self):
+    #     self.checkForDuplicates(self.actuatorCoeffDirectory)
+
+    # ####################################################################################
+    # #    Check that actuator coeff files have coeffs that need to be in them.          #
+    # ####################################################################################
+    # def testActuatorEssentialCoeffs(self):
+    #     for classLetterAsString in classToCoeffFileDictionary:
+    #         self.checkForNeeded(self.actuatorCoeffDirectory, classLetterAsString, coeffCollectionDefinitions.ActuatorNeededCoeffs)
+
+    # ####################################################################################
+    # #    Check that class coeff files only have coeffs that should be in them.         #
+    # ####################################################################################
+    # def testClassCoeffsValidSchema(self):
+    #     # Assemble the schema
+    #     for classToCheck in classToCoeffFileDictionary:
+    #         schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.class_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.actuator_class_info_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+    #         self.checkValidSchema(schema, self.classCoeffDirectory, coeffCollectionDefinitions.AllowedClassFiles[classToCheck])
+
+    # ####################################################################################
+    # #    Check that class coeff files have no duplicate coeffs.                        #
+    # ####################################################################################
+    # def testClassNoDuplicateCoeffs(self):
+    #     self.checkForDuplicates(self.classCoeffDirectory)
+
+    # ####################################################################################
+    # #    Check that class coeff files have coeffs that need to be in them.             #
+    # ####################################################################################
+    # def testClassEssentialCoeffs(self):
+    #     for classLetterAsString in classToCoeffFileDictionary:
+    #         self.checkForNeeded(self.classCoeffDirectory, classLetterAsString, coeffCollectionDefinitions.ClassNeededCoeffs)
+
+    ####################################################################################
+    #    Check that controller coeff files only have coeffs that should be in them.    #
+    ####################################################################################
+    def testControllerCoeffsValidSchema(self):
+        # Assemble the schema
+        for classLetterAsString in classToCoeffFileDictionary:
+            schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.controller_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+            for controllerFile in coeffCollectionDefinitions.AllowedControllerFiles[classLetterAsString]:
+                self.checkValidSchema(schema, self.controllerCoeffDirectory, controllerFile)
 
         # ####################################################################################
         # #    Check that controller coeff files have no duplicate coeffs.                   #

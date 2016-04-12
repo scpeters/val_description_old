@@ -35,8 +35,6 @@
 
         <!-- Sensor Feedback -->
         <Coeff id="ForceControl_SensorFeedback" value="0.0"/>
-    <!-- end Torque Controller -->
-    
   </Coeffs>
 
 </CoeffData>
