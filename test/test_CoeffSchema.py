@@ -9,6 +9,28 @@ from lxml import etree as xmlParser
 import lxml
 import logging
 
+classToCoeffFileDictionary = {'a': 'v_a_', 'b': 'v_b_', 'c': 'v_c_', 'd': 'v_d_', 'e': 'v_e_', 'f': 'v_f_', 'g': 'v_g_', 'h_athena1': 'athena1', 'h_athena2': 'athena2'}
+
+classToActuatorSchemaDictionary = {'a': coeffSchemaDefinitions.actuator_coeffs_definition,
+                                   'b': coeffSchemaDefinitions.actuator_coeffs_definition,
+                                   'c': coeffSchemaDefinitions.actuator_coeffs_definition,
+                                   'd': coeffSchemaDefinitions.actuator_coeffs_definition,
+                                   'e': coeffSchemaDefinitions.actuator_coeffs_definition,
+                                   'f': coeffSchemaDefinitions.actuator_coeffs_definition,
+                                   'g': coeffSchemaDefinitions.actuator_coeffs_definition,
+                                   'h_athena1': coeffSchemaDefinitions.athena1_actuator_coeffs_definition,
+                                   'h_athena2': coeffSchemaDefinitions.athena2_actuator_coeffs_definition}
+
+classToActuatorCoeffFilesSchemaDictionary = {'a': coeffSchemaDefinitions.actuator_coeff_files_definition,
+                                             'b': coeffSchemaDefinitions.actuator_coeff_files_definition,
+                                             'c': coeffSchemaDefinitions.actuator_coeff_files_definition,
+                                             'd': coeffSchemaDefinitions.actuator_coeff_files_definition,
+                                             'e': coeffSchemaDefinitions.actuator_coeff_files_definition,
+                                             'f': coeffSchemaDefinitions.actuator_coeff_files_definition,
+                                             'g': coeffSchemaDefinitions.actuator_coeff_files_definition,
+                                             'h_athena1': ''' ''',
+                                             'h_athena2': ''' '''}
+
 
 class coeffFileTests(unittest.TestCase):
 
@@ -52,31 +74,38 @@ class coeffFileTests(unittest.TestCase):
                 self.incorrectFiles.append(coeffFile)
         assert len(self.incorrectFiles) == 0
 
-    def checkForNeeded(self, directory, neededCoeffs, checkOnlyHClass=False):
-        # Assemble the schema
+    def checkForNeeded(self, directory, classToCheck, dictionaryToCheck):
         os.chdir(directory)
-        for coeffFile in glob.glob("*.xml"):
-            if 'test' not in coeffFile:  # Don't check the test files
-                if checkOnlyHClass and 'v_h_' in coeffFile or not checkOnlyHClass and 'v_h_' not in coeffFile:
-                    try:
-                        xmlCoeffObject = xmlParser.parse(coeffFile)
-                        coeffNames = []
-                        for coeff in xmlCoeffObject.iter('Coeff'):
-                            coeffNames.append(coeff.get('id'))
-                        for coeff in neededCoeffs:
-                            if coeff not in coeffNames:
-                                raise Exception
-                    except Exception:
-                        self.log.error(coeffFile + " is missing a needed coeff " + coeff)
-                        self.incorrectFiles.append(coeffFile)
+
+        coeffFilesToCheck = []
+        allCoeffFiles = glob.glob("*.xml")
+
+        for coeffFile in allCoeffFiles:
+            if classToCoeffFileDictionary[classToCheck] in coeffFile and 'test' not in coeffFile:  # Don't check test files
+                coeffFilesToCheck.append(coeffFile)
+
+        for coeffFile in coeffFilesToCheck:
+            try:
+                xmlCoeffObject = xmlParser.parse(coeffFile)
+                coeffNames = []
+                for coeff in xmlCoeffObject.iter('Coeff'):
+                    coeffNames.append(coeff.get('id'))
+                for coeff in dictionaryToCheck[classToCheck]:
+                    if coeff not in coeffNames:
+                        raise Exception
+            except Exception:
+                print classToCheck
+                self.log.error(coeffFile + " is missing a needed coeff " + coeff)
+                self.incorrectFiles.append(coeffFile)
         assert len(self.incorrectFiles) == 0
 
-    def checkValidSchema(self, schema, directory, checkOnlyHClass=False):
+    def checkValidSchema(self, schema, directory, filenameStringPatternToCheck):
         parser = self.getSchemaParser(schema)
         os.chdir(directory)
-        for coeffFile in glob.glob("*.xml"):
-            if 'test' not in coeffFile:  # Don't check the test files
-                if checkOnlyHClass and 'v_h_' in coeffFile or not checkOnlyHClass and 'v_h_' not in coeffFile:
+
+        if not filenameStringPatternToCheck is None:  # hacky way to skip some things.Giggity
+            for coeffFile in glob.glob("*.xml"):
+                if 'test' not in coeffFile and filenameStringPatternToCheck in coeffFile:
                     try:
                         root = xmlParser.parse(coeffFile, parser)
                         self.correctFiles.append(coeffFile)
@@ -86,20 +115,18 @@ class coeffFileTests(unittest.TestCase):
 
         assert len(self.incorrectFiles) == 0
 
-    ####################################################################################
-    #    Check that actuator coeff files only have coeffs that should be in them.      #
-    ####################################################################################
+    ###################################################################################
+    #   Check that actuator coeff files only have coeffs that should be in them.      #
+    ###################################################################################
     def testActuatorCoeffsValidSchema(self):
         # Assemble the schema
-        schemaNoClassH = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.actuator_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.actuator_coeff_files_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-        self.checkValidSchema(schemaNoClassH, self.actuatorCoeffDirectory)
+        for classToCheck in classToCoeffFileDictionary:
+            schema = coeffSchemaDefinitions.schema_header + classToActuatorSchemaDictionary[classToCheck] + coeffSchemaDefinitions.header_coeff_definition + classToActuatorCoeffFilesSchemaDictionary[classToCheck] + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+            self.checkValidSchema(schema, self.actuatorCoeffDirectory, classToCoeffFileDictionary[classToCheck])
 
-        schemaForClassH = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.athena_actuator_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-        self.checkValidSchema(schemaForClassH, self.actuatorCoeffDirectory, True)
-
-    ####################################################################################
-    #    Check that actuator coeff files have no duplicate coeffs.                     #
-    ####################################################################################
+    ###################################################################################
+    #   Check that actuator coeff files have no duplicate coeffs.                     #
+    ###################################################################################
     def testActuatorNoDuplicateCoeffs(self):
         self.checkForDuplicates(self.actuatorCoeffDirectory)
 
@@ -107,124 +134,127 @@ class coeffFileTests(unittest.TestCase):
     #    Check that actuator coeff files have coeffs that need to be in them.          #
     ####################################################################################
     def testActuatorEssentialCoeffs(self):
-        self.checkForNeeded(self.actuatorCoeffDirectory, coeffCollectionDefinitions.ActuatorNeededCoeffs)
+        for classLetterAsString in classToCoeffFileDictionary:
+            self.checkForNeeded(self.actuatorCoeffDirectory, classLetterAsString, coeffCollectionDefinitions.ActuatorNeededCoeffs)
 
-    # ####################################################################################
-    # #    Check that class coeff files only have coeffs that should be in them.         #
-    # ####################################################################################
-    # def testClassCoeffsValidSchema(self):
-    #     # Assemble the schema
-    #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.class_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.actuator_class_info_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-    #     self.checkValidSchema(schema, self.classCoeffDirectory)
+    ####################################################################################
+    #    Check that class coeff files only have coeffs that should be in them.         #
+    ####################################################################################
+    def testClassCoeffsValidSchema(self):
+        # Assemble the schema
+        for classToCheck in classToCoeffFileDictionary:
+            schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.class_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.actuator_class_info_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+            self.checkValidSchema(schema, self.classCoeffDirectory, coeffCollectionDefinitions.AllowedClassFiles[classToCheck])
 
-    # ####################################################################################
-    # #    Check that class coeff files have no duplicate coeffs.                        #
-    # ####################################################################################
-    # def testClassNoDuplicateCoeffs(self):
-    #     self.checkForDuplicates(self.classCoeffDirectory)
+    ####################################################################################
+    #    Check that class coeff files have no duplicate coeffs.                        #
+    ####################################################################################
+    def testClassNoDuplicateCoeffs(self):
+        self.checkForDuplicates(self.classCoeffDirectory)
 
-    # ####################################################################################
-    # #    Check that class coeff files have coeffs that need to be in them.             #
-    # ####################################################################################
+    ####################################################################################
+    #    Check that class coeff files have coeffs that need to be in them.             #
+    ####################################################################################
     # def testClassEssentialCoeffs(self):
-    #     self.checkForNeeded(self.classCoeffDirectory, coeffCollectionDefinitions.ClassNeededCoeffs)
+    #     for classToCheck in classToCoeffFileDictionary:
+    #         self.checkForNeeded(self.classCoeffDirectory, classToCheck)
 
-    # ####################################################################################
-    # #    Check that controller coeff files only have coeffs that should be in them.    #
-    # ####################################################################################
-    # def testControllerCoeffsValidSchema(self):
-    #     # Assemble the schema
-    #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.controller_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-    #     self.checkValidSchema(schema, self.controllerCoeffDirectory)
+        # ####################################################################################
+        # #    Check that controller coeff files only have coeffs that should be in them.    #
+        # ####################################################################################
+        # def testControllerCoeffsValidSchema(self):
+        #     # Assemble the schema
+        #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.controller_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+        #     self.checkValidSchema(schema, self.controllerCoeffDirectory)
 
-    # ####################################################################################
-    # #    Check that controller coeff files have no duplicate coeffs.                   #
-    # ####################################################################################
-    # def testControllerNoDuplicateCoeffs(self):
-    #     self.checkForDuplicates(self.controllerCoeffDirectory)
+        # ####################################################################################
+        # #    Check that controller coeff files have no duplicate coeffs.                   #
+        # ####################################################################################
+        # def testControllerNoDuplicateCoeffs(self):
+        #     self.checkForDuplicates(self.controllerCoeffDirectory)
 
-    # ####################################################################################
-    # #    Check that controller coeff files have coeffs that need to be in them.        #
-    # ####################################################################################
-    # def testControllerEssentialCoeffs(self):
-    #     self.checkForNeeded(self.controllerCoeffDirectory, coeffCollectionDefinitions.ControllerNeededCoeffs)
+        # ####################################################################################
+        # #    Check that controller coeff files have coeffs that need to be in them.        #
+        # ####################################################################################
+        # def testControllerEssentialCoeffs(self):
+        #     self.checkForNeeded(self.controllerCoeffDirectory, coeffCollectionDefinitions.ControllerNeededCoeffs)
 
-    # ####################################################################################
-    # #    Check that location coeff files only have coeffs that should be in them.      #
-    # ####################################################################################
-    # def testLocationCoeffsValidSchema(self):
-    #     # Assemble the schema
-    #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.location_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-    #     self.checkValidSchema(schema, self.controllerCoeffDirectory)
+        # ####################################################################################
+        # #    Check that location coeff files only have coeffs that should be in them.      #
+        # ####################################################################################
+        # def testLocationCoeffsValidSchema(self):
+        #     # Assemble the schema
+        #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.location_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+        #     self.checkValidSchema(schema, self.controllerCoeffDirectory)
 
-    # ####################################################################################
-    # #    Check that location coeff files have no duplicate coeffs.                     #
-    # ####################################################################################
-    # def testLocationNoDuplicateCoeffs(self):
-    #     self.checkForDuplicates(self.locationCoeffDirectory)
+        # ####################################################################################
+        # #    Check that location coeff files have no duplicate coeffs.                     #
+        # ####################################################################################
+        # def testLocationNoDuplicateCoeffs(self):
+        #     self.checkForDuplicates(self.locationCoeffDirectory)
 
-    # ####################################################################################
-    # #    Check that location coeff files have coeffs that need to be in them.          #
-    # ####################################################################################
-    # def testLocationEssentialCoeffs(self):
-    #     self.checkForNeeded(self.locationCoeffDirectory, coeffCollectionDefinitions.LocationNeededCoeffs)
+        # ####################################################################################
+        # #    Check that location coeff files have coeffs that need to be in them.          #
+        # ####################################################################################
+        # def testLocationEssentialCoeffs(self):
+        #     self.checkForNeeded(self.locationCoeffDirectory, coeffCollectionDefinitions.LocationNeededCoeffs)
 
-    # ####################################################################################
-    # #    Check that mode coeff files only have coeffs that should be in them.          #
-    # ####################################################################################
-    # def testModesCoeffsValidSchema(self):
-    #     # Assemble the schema
-    #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.modes_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-    #     self.checkValidSchema(schema, self.controllerCoeffDirectory)
+        # ####################################################################################
+        # #    Check that mode coeff files only have coeffs that should be in them.          #
+        # ####################################################################################
+        # def testModesCoeffsValidSchema(self):
+        #     # Assemble the schema
+        #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.modes_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+        #     self.checkValidSchema(schema, self.controllerCoeffDirectory)
 
-    # ####################################################################################
-    # #    Check that mode coeff files have no duplicate coeffs.                         #
-    # ####################################################################################
-    # def testModeNoDuplicateCoeffs(self):
-    #     self.checkForDuplicates(self.modesCoeffDirectory)
+        # ####################################################################################
+        # #    Check that mode coeff files have no duplicate coeffs.                         #
+        # ####################################################################################
+        # def testModeNoDuplicateCoeffs(self):
+        #     self.checkForDuplicates(self.modesCoeffDirectory)
 
-    # ####################################################################################
-    # #    Check that mode coeff files have coeffs that need to be in them.              #
-    # ####################################################################################
-    # def testModeEssentialCoeffs(self):
-    #     self.checkForNeeded(self.modesCoeffDirectory, coeffCollectionDefinitions.ModesNeededCoeffs)
+        # ####################################################################################
+        # #    Check that mode coeff files have coeffs that need to be in them.              #
+        # ####################################################################################
+        # def testModeEssentialCoeffs(self):
+        #     self.checkForNeeded(self.modesCoeffDirectory, coeffCollectionDefinitions.ModesNeededCoeffs)
 
-    # ####################################################################################
-    # #    Check that safety coeff files only have coeffs that should be in them.        #
-    # ####################################################################################
-    # def testSafetyCoeffsValidSchema(self):
-    #     # Assemble the schema
-    #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.safety_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-    #     self.checkValidSchema(schema, self.controllerCoeffDirectory)
+        # ####################################################################################
+        # #    Check that safety coeff files only have coeffs that should be in them.        #
+        # ####################################################################################
+        # def testSafetyCoeffsValidSchema(self):
+        #     # Assemble the schema
+        #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.safety_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+        #     self.checkValidSchema(schema, self.controllerCoeffDirectory)
 
-    # ####################################################################################
-    # #    Check that safety coeff files have no duplicate coeffs.                       #
-    # ####################################################################################
-    # def testSafetyNoDuplicateCoeffs(self):
-    #     self.checkForDuplicates(self.safetyCoeffDirectory)
+        # ####################################################################################
+        # #    Check that safety coeff files have no duplicate coeffs.                       #
+        # ####################################################################################
+        # def testSafetyNoDuplicateCoeffs(self):
+        #     self.checkForDuplicates(self.safetyCoeffDirectory)
 
-    # ####################################################################################
-    # #    Check that safety coeff files have coeffs that need to be in them.            #
-    # ####################################################################################
-    # def testSafetyEssentialCoeffs(self):
-    #     self.checkForNeeded(self.safetyCoeffDirectory, coeffCollectionDefinitions.SafetyNeededCoeffs)
+        # ####################################################################################
+        # #    Check that safety coeff files have coeffs that need to be in them.            #
+        # ####################################################################################
+        # def testSafetyEssentialCoeffs(self):
+        #     self.checkForNeeded(self.safetyCoeffDirectory, coeffCollectionDefinitions.SafetyNeededCoeffs)
 
-    # ####################################################################################
-    # #    Check that sensor coeff files only have coeffs that should be in them.        #
-    # ####################################################################################
-    # def testSensorCoeffsValidSchema(self):
-    #     # Assemble the schema
-    #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.sensor_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-    #     self.checkValidSchema(schema, self.controllerCoeffDirectory)
+        # ####################################################################################
+        # #    Check that sensor coeff files only have coeffs that should be in them.        #
+        # ####################################################################################
+        # def testSensorCoeffsValidSchema(self):
+        #     # Assemble the schema
+        #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.sensor_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+        #     self.checkValidSchema(schema, self.controllerCoeffDirectory)
 
-    # ####################################################################################
-    # #    Check that sensor coeff files have no duplicate coeffs.                       #
-    # ####################################################################################
-    # def testSensorNoDuplicateCoeffs(self):
-    #     self.checkForDuplicates(self.sensorCoeffDirectory)
+        # ####################################################################################
+        # #    Check that sensor coeff files have no duplicate coeffs.                       #
+        # ####################################################################################
+        # def testSensorNoDuplicateCoeffs(self):
+        #     self.checkForDuplicates(self.sensorCoeffDirectory)
 
-    # ####################################################################################
-    # #    Check that sensor coeff files have coeffs that need to be in them.            #
-    # ####################################################################################
-    # def testSensorEssentialCoeffs(self):
-    #     self.checkForNeeded(self.sensorCoeffDirectory, coeffCollectionDefinitions.SensorNeededCoeffs)
+        # ####################################################################################
+        # #    Check that sensor coeff files have coeffs that need to be in them.            #
+        # ####################################################################################
+        # def testSensorEssentialCoeffs(self):
+        #     self.checkForNeeded(self.sensorCoeffDirectory, coeffCollectionDefinitions.SensorNeededCoeffs)

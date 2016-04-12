@@ -33,7 +33,7 @@ actuator_coeffs_definition = \
 </xs:simpleType>
 '''
 
-athena_actuator_coeffs_definition = \
+athena1_actuator_coeffs_definition = \
     '''
 <xs:simpleType name="ValidCoeffs">
     <xs:restriction base="xs:string">
@@ -75,6 +75,14 @@ athena_actuator_coeffs_definition = \
         <xs:enumeration value="WR_posKP"/>
         <xs:enumeration value="WR_posKD"/>
         <xs:enumeration value="WR_dutylmt"/>
+    </xs:restriction>
+</xs:simpleType>
+'''
+
+athena2_actuator_coeffs_definition = \
+    '''
+<xs:simpleType name="ValidCoeffs">
+    <xs:restriction base="xs:string">
         <xs:enumeration value="Fing1_elecoffset"/>
         <xs:enumeration value="Fing1_locmdlmt"/>
         <xs:enumeration value="Fing1_hicmdlmt"/>
@@ -111,6 +119,8 @@ class_coeffs_definition = \
     '''
 <xs:simpleType name="ValidCoeffs">
     <xs:restriction base="xs:string">
+        <xs:enumeration value="JointTorqueLimit_Nm"/>
+        <xs:enumeration value="JointForceLimit_N"/>
         <xs:enumeration value="CurrentSafeLimit"/>
         <xs:enumeration value="EncoderCPR"/>
         <xs:enumeration value="FluxLinkage"/>
@@ -171,8 +181,6 @@ location_coeffs_definition = \
     '''
 <xs:simpleType name="ValidCoeffs">
   <xs:restriction base="xs:string">
-    <xs:enumeration value="JointTorqueLimit_Nm"/>
-    <xs:enumeration value="JointForceLimit_N"/>
     <xs:enumeration value="JointSafety_LowerLimit_Rad"/>
     <xs:enumeration value="JointSafety_UpperLimit_Rad"/>
     <xs:enumeration value="JointSafety_LowerLimit_m"/>

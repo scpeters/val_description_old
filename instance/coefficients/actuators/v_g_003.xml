@@ -1,16 +1,18 @@
 <CoeffData>
     <ClassFile id="g.xml"/>
     <ControllerFile id="g_sv.xml"/>
-    <LocationFile id="testbench.xml"/>
-    <SensorsFile id="sensors.xml"/>
+    <LocationFile id="forearm_yaw.xml"/>
+    <SensorsFile id="sensors_leonidas.xml"/>
     <SafetyFile id="safety.xml"/>
     <ModeFile id="mode.xml"/>
     <Coeffs>
-        <Coeff description="" id="EncMountingDir" value="1.0"/>
-        <Coeff description="" id="EncoderIndexOffset" value="3.21578736244"/>
-        <Coeff description="" id="JointKinematicDir" value="1"/>
-        <Coeff description="" id="JointSensors_MotorPosition" value="1"/>
-        <Coeff description="" id="JointSensors_OutputForce" value="3"/>
-        <Coeff description="" id="JointSensors_OutputPosition" value="2.0"/>
+        <Coeff id="EncMountingDir" value="1.0"/>
+        <Coeff id="EncoderIndexOffset" value="3.21578736244"/>
+        <Coeff id="JointKinematicDir" value="1"/>
+        <Coeff id="JointSensors_MotorPosition" value="1"/>
+        <Coeff id="JointSensors_OutputForce" value="3"/>
+        <Coeff id="JointSensors_OutputPosition" value="2.0"/>
+        <Coeff id="JointSensors_OutputVelocity" value="1.0" />
+        <Coeff id="PositionOffset_Rad" value="0.246698320163" />
     </Coeffs>
 </CoeffData>

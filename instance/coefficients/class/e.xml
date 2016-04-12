@@ -9,9 +9,6 @@
     <Coeff id="Inductance_DAxis" value="0.0009"/>
     <Coeff id="Inductance_QAxis" value="0.00139"/>
     <Coeff id="JointForceLimit_N" value="3250.0"/>
-    <Coeff id="JointForceLowerLimit_N" value="-500000.0"/>
-    <Coeff id="JointForceUpperLimit_N" value="500000.0"/>
-    <Coeff id="JointForce_AsymLimits" value="0.0"/>
     <Coeff id="JointMaxValue" value="3.1415926"/>
     <Coeff id="JointMinValue" value="-3.1415926"/>
     <Coeff id="JointOutputAPS_CountsToRad" value="0.00076699038"/>
