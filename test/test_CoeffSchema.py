@@ -52,21 +52,23 @@ class coeffFileTests(unittest.TestCase):
                 self.incorrectFiles.append(coeffFile)
         assert len(self.incorrectFiles) == 0
 
-    def checkForNeeded(self, directory, neededCoeffs):
+    def checkForNeeded(self, directory, neededCoeffs, checkOnlyHClass=False):
         # Assemble the schema
         os.chdir(directory)
         for coeffFile in glob.glob("*.xml"):
-            try:
-                xmlCoeffObject = xmlParser.parse(coeffFile)
-                coeffNames = []
-                for coeff in xmlCoeffObject.iter('Coeff'):
-                    coeffNames.append(coeff.get('id'))
-                for coeff in neededCoeffs:
-                    if coeff not in coeffNames:
-                        raise Exception
-            except Exception:
-                self.log.error(coeffFile + " is missing a needed coeff " + coeff)
-                self.incorrectFiles.append(coeffFile)
+            if 'test' not in coeffFile:  # Don't check the test files
+                if checkOnlyHClass and 'v_h_' in coeffFile or not checkOnlyHClass and 'v_h_' not in coeffFile:
+                    try:
+                        xmlCoeffObject = xmlParser.parse(coeffFile)
+                        coeffNames = []
+                        for coeff in xmlCoeffObject.iter('Coeff'):
+                            coeffNames.append(coeff.get('id'))
+                        for coeff in neededCoeffs:
+                            if coeff not in coeffNames:
+                                raise Exception
+                    except Exception:
+                        self.log.error(coeffFile + " is missing a needed coeff " + coeff)
+                        self.incorrectFiles.append(coeffFile)
         assert len(self.incorrectFiles) == 0
 
     def checkValidSchema(self, schema, directory, checkOnlyHClass=False):
