@@ -1,7 +1,7 @@
 <CoeffData>
     <ClassFile id="e.xml"/>
     <ControllerFile id="e_dh.xml"/>
-    <LocationFile id="testbench.xml"/>
+    <LocationFile id="ankle.xml"/>
     <SensorsFile id="sensors.xml"/>
     <SafetyFile id="safety.xml"/>
     <ModeFile id="mode.xml"/>

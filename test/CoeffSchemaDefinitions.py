@@ -219,6 +219,33 @@ modes_coeffs_definition = \
 </xs:simpleType>
 '''
 
+location_files_definition = \
+    '''
+  <xs:simpleType name="ValidLocations">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="shoulder_pitch.xml"/>
+      <xs:enumeration value="hip_yaw_right.xml"/>
+      <xs:enumeration value="hip_yaw_left.xml"/>
+      <xs:enumeration value="torso_yaw.xml"/>
+      <xs:enumeration value="hip_roll_right.xml"/>
+      <xs:enumeration value="hip_roll_left.xml"/>
+      <xs:enumeration value="shoulder_roll_left.xml"/>
+      <xs:enumeration value="shoulder_roll_right.xml"/>
+      <xs:enumeration value="hip_pitch.xml"/>
+      <xs:enumeration value="knee_pitch.xml"/>
+      <xs:enumeration value="trunk.xml"/>
+      <xs:enumeration value="ankle.xml"/>
+      <xs:enumeration value="shoulder_yaw.xml"/>
+      <xs:enumeration value="elbow_pitch_left.xml"/>
+      <xs:enumeration value="elbow_pitch_right.xml"/>
+      <xs:enumeration value="neck_lower.xml"/>
+      <xs:enumeration value="neck_upper.xml"/>
+      <xs:enumeration value="neck_yaw.xml"/>
+      <xs:enumeration value="forearm_yaw.xml"/>
+    </xs:restriction>
+  </xs:simpleType>
+'''
+
 safety_coeffs_definition = \
     '''
 <xs:simpleType name="ValidCoeffs">
@@ -300,7 +327,7 @@ actuator_coeff_files_definition = \
 </xs:element>
 <xs:element name="LocationFile">
       <xs:complexType>
-            <xs:attribute name="id" type="xs:string"></xs:attribute>
+            <xs:attribute name="id" type="ValidLocations"></xs:attribute>
       </xs:complexType>
 </xs:element>
 <xs:element name="SensorsFile">
