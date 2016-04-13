@@ -8,6 +8,7 @@ from val_description import CoeffCollectionDefinitions as coeffCollectionDefinit
 from lxml import etree as xmlParser
 import lxml
 import logging
+import rospkg
 
 classToActuatorCoeffFilenameDictionary = {'a': 'v_a_', 'b': 'v_b_', 'c': 'v_c_', 'd': 'v_d_', 'e': 'v_e_', 'f': 'v_f_', 'g': 'v_g_', 'h_athena1': 'athena1', 'h_athena2': 'athena2'}
 
@@ -35,16 +36,18 @@ classToActuatorCoeffFilesSchemaDictionary = {'a': coeffSchemaDefinitions.actuato
 class coeffFileTests(unittest.TestCase):
 
     def setUp(self):
-        self.catkinWorkspaceDirectory = os.getenv("VAL_WORKSPACE")
+        rospack = rospkg.RosPack()
+
+        self.catkinWorkspaceDirectory = rospack.get_path('val_description')
 
         # Define the directories that coeffs live in
-        self.actuatorCoeffDirectory = self.catkinWorkspaceDirectory + '/src/val_description/instance/coefficients/actuators'
-        self.classCoeffDirectory = self.catkinWorkspaceDirectory + '/src/val_description/instance/coefficients/class'
-        self.controllerCoeffDirectory = self.catkinWorkspaceDirectory + '/src/val_description/instance/coefficients/controllers'
-        self.locationCoeffDirectory = self.catkinWorkspaceDirectory + '/src/val_description/instance/coefficients/location'
-        self.modesCoeffDirectory = self.catkinWorkspaceDirectory + '/src/val_description/instance/coefficients/modes'
-        self.safetyCoeffDirectory = self.catkinWorkspaceDirectory + '/src/val_description/instance/coefficients/safety'
-        self.sensorCoeffDirectory = self.catkinWorkspaceDirectory + '/src/val_description/instance/coefficients/sensors'
+        self.actuatorCoeffDirectory = self.catkinWorkspaceDirectory + '/instance/coefficients/actuators'
+        self.classCoeffDirectory = self.catkinWorkspaceDirectory + '/instance/coefficients/class'
+        self.controllerCoeffDirectory = self.catkinWorkspaceDirectory + '/instance/coefficients/controllers'
+        self.locationCoeffDirectory = self.catkinWorkspaceDirectory + '/instance/coefficients/location'
+        self.modesCoeffDirectory = self.catkinWorkspaceDirectory + '/instance/coefficients/modes'
+        self.safetyCoeffDirectory = self.catkinWorkspaceDirectory + '/instance/coefficients/safety'
+        self.sensorCoeffDirectory = self.catkinWorkspaceDirectory + '/instance/coefficients/sensors'
 
         self.log = logging.getLogger("Coeff Test Logger")
         self.correctFiles = []
