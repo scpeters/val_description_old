@@ -260,8 +260,23 @@ ControllerNeededCoeffs = ["Commutation_Select"]
 
 ModesNeededCoeffs = []
 
-LocationNeededCoeffs = ["JointSafety_LowerLimit_Rad",
-                        "JointSafety_UpperLimit_Rad"]
+LocationNeededCoeffs = {"a": ["JointSafety_LowerLimit_Rad",
+                              "JointSafety_UpperLimit_Rad"],
+                        "b": ["JointSafety_LowerLimit_Rad",
+                              "JointSafety_UpperLimit_Rad"],
+                        "c": ["JointSafety_LowerLimit_Rad",
+                              "JointSafety_UpperLimit_Rad"],
+                        "d": ["JointSafety_LowerLimit_Rad",
+                              "JointSafety_UpperLimit_Rad"],
+                        "e": ["JointSafety_LowerLimit_m",
+                              "JointSafety_UpperLimit_m"],
+                        "f": ["JointSafety_LowerLimit_Rad",
+                              "JointSafety_UpperLimit_Rad"],
+                        "g": ["JointSafety_LowerLimit_Rad",
+                              "JointSafety_UpperLimit_Rad"],
+                        "h_athena1": [None],
+                        "h_athena2": [None]
+                        }
 
 SafetyNeededCoeffs = ["CommTimeouts",
                       "TemperatureSensor_MaxTemp1",

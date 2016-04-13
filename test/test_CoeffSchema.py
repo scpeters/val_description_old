@@ -195,18 +195,19 @@ class coeffFileTests(unittest.TestCase):
             for locationFile in coeffCollectionDefinitions.AllowedLocationFiles[classLetter]:
                 self.checkValidSchema(schema, self.locationCoeffDirectory, locationFile)
 
-    # ####################################################################################
-    # #    Check that location coeff files have no duplicate coeffs.                     #
-    # ####################################################################################
-    # def testLocationNoDuplicateCoeffs(self):
-    #     self.checkForDuplicates(self.locationCoeffDirectory)
+    ####################################################################################
+    #    Check that location coeff files have no duplicate coeffs.                     #
+    ####################################################################################
+    def testLocationNoDuplicateCoeffs(self):
+        self.checkForDuplicates(self.locationCoeffDirectory)
 
-    # ####################################################################################
-    # #    Check that location coeff files have coeffs that need to be in them.          #
-    # ####################################################################################
-    # def testLocationEssentialCoeffs(self):
-    #     for classLetter in classToActuatorCoeffFilenameDictionary:
-    #         self.checkForNeeded(self.locationCoeffDirectory, classLetter, coeffCollectionDefinitions.LocationNeededCoeffs)
+    ####################################################################################
+    #    Check that location coeff files have coeffs that need to be in them.          #
+    ####################################################################################
+    def testLocationEssentialCoeffs(self):
+        for classLetter in classToActuatorCoeffFilenameDictionary:
+            for filename in coeffCollectionDefinitions.AllowedLocationFiles[classLetter]:
+                self.checkForNeeded(self.locationCoeffDirectory, classLetter, coeffCollectionDefinitions.LocationNeededCoeffs[classLetter], filename)
 
         # ####################################################################################
         # #    Check that mode coeff files only have coeffs that should be in them.          #
