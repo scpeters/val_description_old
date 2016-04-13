@@ -254,7 +254,10 @@ AllowedSensorFiles = {"a": "sensors.xml",
                       "d": "sensors.xml",
                       "e": "sensors.xml",
                       "f": "sensors.xml",
-                      "g": "sensors_leonidas.xml"}
+                      "g": "sensors_leonidas.xml",
+                      "h_athena1": None,
+                      "h_athena2": None
+                      }
 
 AllowedControllerFiles = {"a": ["a_sv.xml", "a_dh.xml"],
                           "b": ["b_sv.xml", "b_dh.xml"],

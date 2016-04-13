@@ -3,7 +3,7 @@
     <ControllerFile id="g_sv.xml" />
     <LocationFile id="neck_upper.xml" />
     <SensorsFile id="sensors_leonidas.xml" />
-    <SafetyFile id="safetyOSENTI.xml" />
+    <SafetyFile id="safety.xml" />
     <ModeFile id="mode.xml" />
     <Coeffs>
         <Coeff id="EncMountingDir" value="-1.0" />

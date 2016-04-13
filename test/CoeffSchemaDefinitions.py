@@ -246,11 +246,30 @@ location_files_definition = \
   </xs:simpleType>
 '''
 
+sensor_files_definition = \
+    '''
+  <xs:simpleType name="ValidSensorFiles">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="sensors.xml"/>
+      <xs:enumeration value="sensors_leonidas.xml"/>
+    </xs:restriction>
+  </xs:simpleType>
+'''
+
 mode_file_definitions = \
     '''
   <xs:simpleType name="ValidModeFiles">
     <xs:restriction base="xs:string">
       <xs:enumeration value="mode.xml"/>
+    </xs:restriction>
+  </xs:simpleType>
+'''
+
+safety_file_definitions = \
+    '''
+  <xs:simpleType name="ValidSafetyFiles">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="safety.xml"/>
     </xs:restriction>
   </xs:simpleType>
 '''
@@ -341,12 +360,12 @@ actuator_coeff_files_definition = \
 </xs:element>
 <xs:element name="SensorsFile">
       <xs:complexType>
-            <xs:attribute name="id" type="xs:string"></xs:attribute>
+            <xs:attribute name="id" type="ValidSensorFiles"></xs:attribute>
       </xs:complexType>
 </xs:element>
 <xs:element name="SafetyFile">
       <xs:complexType>
-            <xs:attribute name="id" type="xs:string"></xs:attribute>
+            <xs:attribute name="id" type="ValidSafetyFiles"></xs:attribute>
       </xs:complexType>
 </xs:element>
 <xs:element name="ModeFile">
