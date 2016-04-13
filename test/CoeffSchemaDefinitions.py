@@ -246,6 +246,15 @@ location_files_definition = \
   </xs:simpleType>
 '''
 
+mode_file_definitions = \
+    '''
+  <xs:simpleType name="ValidModeFiles">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="mode.xml"/>
+    </xs:restriction>
+  </xs:simpleType>
+'''
+
 safety_coeffs_definition = \
     '''
 <xs:simpleType name="ValidCoeffs">
@@ -342,7 +351,7 @@ actuator_coeff_files_definition = \
 </xs:element>
 <xs:element name="ModeFile">
       <xs:complexType>
-            <xs:attribute name="id" type="xs:string"></xs:attribute>
+            <xs:attribute name="id" type="ValidModeFiles"></xs:attribute>
       </xs:complexType>
 </xs:element>
 '''

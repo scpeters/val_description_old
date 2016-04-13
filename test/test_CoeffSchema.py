@@ -80,7 +80,7 @@ class coeffFileTests(unittest.TestCase):
         coeffFilesToCheck = []
         allCoeffFiles = glob.glob("*.xml")
 
-        if filenameString is None:
+        if filenameString is None or not neededCoeffs:
             return
 
         for coeffFile in allCoeffFiles:
@@ -123,7 +123,8 @@ class coeffFileTests(unittest.TestCase):
     def testActuatorCoeffsValidSchema(self):
         # Assemble the schema
         for classToCheck in classToActuatorCoeffFilenameDictionary:
-            schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.location_files_definition + classToActuatorSchemaDictionary[classToCheck] + coeffSchemaDefinitions.header_coeff_definition + classToActuatorCoeffFilesSchemaDictionary[classToCheck] + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+            schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.mode_file_definitions + coeffSchemaDefinitions.location_files_definition + classToActuatorSchemaDictionary[classToCheck] + \
+                coeffSchemaDefinitions.header_coeff_definition + classToActuatorCoeffFilesSchemaDictionary[classToCheck] + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
             self.checkValidSchema(schema, self.actuatorCoeffDirectory, classToActuatorCoeffFilenameDictionary[classToCheck])
 
     ###################################################################################
@@ -209,45 +210,47 @@ class coeffFileTests(unittest.TestCase):
             for filename in coeffCollectionDefinitions.AllowedLocationFiles[classLetter]:
                 self.checkForNeeded(self.locationCoeffDirectory, classLetter, coeffCollectionDefinitions.LocationNeededCoeffs[classLetter], filename)
 
-        # ####################################################################################
-        # #    Check that mode coeff files only have coeffs that should be in them.          #
-        # ####################################################################################
-        # def testModesCoeffsValidSchema(self):
-        #     # Assemble the schema
-        #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.modes_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-        #     self.checkValidSchema(schema, self.controllerCoeffDirectory)
+    ####################################################################################
+    #    Check that mode coeff files only have coeffs that should be in them.          #
+    ####################################################################################
+    def testModesCoeffsValidSchema(self):
+        for classLetter in classToActuatorCoeffFilenameDictionary:
+            schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.modes_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+            self.checkValidSchema(schema, self.modesCoeffDirectory, coeffCollectionDefinitions.AllowedModeFiles[classLetter])
 
-        # ####################################################################################
-        # #    Check that mode coeff files have no duplicate coeffs.                         #
-        # ####################################################################################
-        # def testModeNoDuplicateCoeffs(self):
-        #     self.checkForDuplicates(self.modesCoeffDirectory)
+    ####################################################################################
+    #    Check that mode coeff files have no duplicate coeffs.                         #
+    ####################################################################################
+    def testModeNoDuplicateCoeffs(self):
+        self.checkForDuplicates(self.modesCoeffDirectory)
 
-        # ####################################################################################
-        # #    Check that mode coeff files have coeffs that need to be in them.              #
-        # ####################################################################################
-        # def testModeEssentialCoeffs(self):
-        #     self.checkForNeeded(self.modesCoeffDirectory, coeffCollectionDefinitions.ModesNeededCoeffs)
+    ####################################################################################
+    #    Check that mode coeff files have coeffs that need to be in them.              #
+    ####################################################################################
+    def testModeEssentialCoeffs(self):
+        for classLetter in classToActuatorCoeffFilenameDictionary:
+            self.checkForNeeded(self.modesCoeffDirectory, classLetter, coeffCollectionDefinitions.ModesNeededCoeffs, coeffCollectionDefinitions.AllowedLocationFiles[classLetter])
 
-        # ####################################################################################
-        # #    Check that safety coeff files only have coeffs that should be in them.        #
-        # ####################################################################################
-        # def testSafetyCoeffsValidSchema(self):
-        #     # Assemble the schema
-        #     schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.safety_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
-        #     self.checkValidSchema(schema, self.controllerCoeffDirectory)
+    ####################################################################################
+    #    Check that safety coeff files only have coeffs that should be in them.        #
+    ####################################################################################
+    def testSafetyCoeffsValidSchema(self):
+        for classLetter in classToActuatorCoeffFilenameDictionary:
+            schema = coeffSchemaDefinitions.schema_header + coeffSchemaDefinitions.safety_coeffs_definition + coeffSchemaDefinitions.header_coeff_definition + coeffSchemaDefinitions.coeff_definition + coeffSchemaDefinitions.footer_coeff_definition
+            self.checkValidSchema(schema, self.safetyCoeffDirectory, coeffCollectionDefinitions.AllowedSafetyFiles[classLetter])
 
-        # ####################################################################################
-        # #    Check that safety coeff files have no duplicate coeffs.                       #
-        # ####################################################################################
-        # def testSafetyNoDuplicateCoeffs(self):
-        #     self.checkForDuplicates(self.safetyCoeffDirectory)
+    ####################################################################################
+    #    Check that safety coeff files have no duplicate coeffs.                       #
+    ####################################################################################
+    def testSafetyNoDuplicateCoeffs(self):
+        self.checkForDuplicates(self.safetyCoeffDirectory)
 
-        # ####################################################################################
-        # #    Check that safety coeff files have coeffs that need to be in them.            #
-        # ####################################################################################
-        # def testSafetyEssentialCoeffs(self):
-        #     self.checkForNeeded(self.safetyCoeffDirectory, coeffCollectionDefinitions.SafetyNeededCoeffs)
+    ####################################################################################
+    #    Check that safety coeff files have coeffs that need to be in them.            #
+    ####################################################################################
+    def testSafetyEssentialCoeffs(self):
+        for classLetter in classToActuatorCoeffFilenameDictionary:
+            self.checkForNeeded(self.safetyCoeffDirectory, classLetter, coeffCollectionDefinitions.SafetyNeededCoeffs, coeffCollectionDefinitions.AllowedSafetyFiles[classLetter])
 
         # ####################################################################################
         # #    Check that sensor coeff files only have coeffs that should be in them.        #

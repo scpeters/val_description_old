@@ -237,6 +237,17 @@ AllowedClassFiles = {"a": "a.xml",
                      "h_athena2": None
                      }
 
+AllowedModeFiles = {"a": "mode.xml",
+                    "b": "mode.xml",
+                    "c": "mode.xml",
+                    "d": "mode.xml",
+                    "e": "mode.xml",
+                    "f": "mode.xml",
+                    "g": "mode.xml",
+                    "h_athena1": None,
+                    "h_athena2": None
+                    }
+
 AllowedSensorFiles = {"a": "sensors.xml",
                       "b": "sensors.xml",
                       "c": "sensors.xml",
@@ -255,6 +266,17 @@ AllowedControllerFiles = {"a": ["a_sv.xml", "a_dh.xml"],
                           "h_athena1": [None],
                           "h_athena2": [None]
                           }
+
+AllowedSafetyFiles = {"a": "safety.xml",
+                      "b": "safety.xml",
+                      "c": "safety.xml",
+                      "d": "safety.xml",
+                      "e": "safety.xml",
+                      "f": "safety.xml",
+                      "g": "safety.xml",
+                      "h_athena1": None,
+                      "h_athena2": None
+                      }
 
 ControllerNeededCoeffs = ["Commutation_Select"]
 
@@ -278,7 +300,7 @@ LocationNeededCoeffs = {"a": ["JointSafety_LowerLimit_Rad",
                         "h_athena2": [None]
                         }
 
-SafetyNeededCoeffs = ["CommTimeouts",
+SafetyNeededCoeffs = ["CommTimeoutMs",
                       "TemperatureSensor_MaxTemp1",
                       "TemperatureSensor_MaxTemp2",
                       "TemperatureSensor_SensorLoc1",
