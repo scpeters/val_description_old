@@ -7,7 +7,7 @@
     <ModeFile id="mode.xml" />
     <Coeffs>
         <Coeff description="" id="JointKinematicDir" value="-1.0" />
-        <Coeff description="" id="TorqueOffset_Nm" value="1.16621576023" />
+        <Coeff description="" id="TorqueOffset_Nm" value="0.656753956673" />
         <Coeff description="" id="PositionOffset_Rad" value="2.79798151493" />
         <Coeff description="" id="JointSensors_MotorPosition" value="1" />
         <Coeff description="" id="JointSensors_OutputForce" value="2.0" />
