@@ -74,7 +74,36 @@ class coeffFileTests(unittest.TestCase):
                 self.incorrectFiles.append(coeffFile)
         assert len(self.incorrectFiles) == 0
 
-    def checkForNeeded(self, directory, classToCheck, neededCoeffs, filenameString):
+    def checkSingleXmlId(self, classToCheck, expectedString, filenameString, xmlTagToCheck):
+        os.chdir(self.actuatorCoeffDirectory)
+
+        coeffFilesToCheck = []
+        allCoeffFiles = glob.glob("*.xml")
+
+        if filenameString is None or expectedString is None:
+            return
+
+        for coeffFile in allCoeffFiles:
+            if filenameString in coeffFile:
+                coeffFilesToCheck.append(coeffFile)
+
+        if not coeffFilesToCheck:
+            raise Exception("No filename found that match the string " + filenameString)
+
+        for coeffFile in coeffFilesToCheck:
+            try:
+                xmlCoeffObject = xmlParser.parse(coeffFile)
+                coeffNames = []
+                coeff = xmlCoeffObject.getroot().find(xmlTagToCheck).get('id')
+                if not coeff == expectedString:
+                    raise Exception
+            except Exception:
+                self.log.error(coeffFile + " has incorrect entry " + coeff + " for tag " + xmlTagToCheck)
+                self.incorrectFiles.append(coeffFile)
+
+        assert len(self.incorrectFiles) == 0
+
+    def checkForNeededCoeffs(self, directory, classToCheck, neededCoeffs, filenameString, xmlTagToCheck='Coeff'):
         os.chdir(directory)
 
         coeffFilesToCheck = []
@@ -87,11 +116,14 @@ class coeffFileTests(unittest.TestCase):
             if filenameString in coeffFile and 'test' not in coeffFile:  # Don't check test files
                 coeffFilesToCheck.append(coeffFile)
 
+        if not coeffFilesToCheck:
+            raise Exception("No files found that match the string " + filenameString)
+
         for coeffFile in coeffFilesToCheck:
             try:
                 xmlCoeffObject = xmlParser.parse(coeffFile)
                 coeffNames = []
-                for coeff in xmlCoeffObject.iter('Coeff'):
+                for coeff in xmlCoeffObject.iter(xmlTagToCheck):
                     coeffNames.append(coeff.get('id'))
                 for coeff in neededCoeffs:
                     if coeff not in coeffNames:
@@ -117,9 +149,9 @@ class coeffFileTests(unittest.TestCase):
 
         assert len(self.incorrectFiles) == 0
 
-    ###################################################################################
-    #   Check that actuator coeff files only have coeffs that should be in them.      #
-    ###################################################################################
+    ##################################################################################
+    #  Check that actuator coeff files only have coeffs that should be in them.      #
+    ##################################################################################
     def testActuatorCoeffsValidSchema(self):
         # Assemble the schema
         for classToCheck in classToActuatorCoeffFilenameDictionary:
@@ -138,7 +170,11 @@ class coeffFileTests(unittest.TestCase):
     ####################################################################################
     def testActuatorEssentialCoeffs(self):
         for classLetter in classToActuatorCoeffFilenameDictionary:
-            self.checkForNeeded(self.actuatorCoeffDirectory, classLetter, coeffCollectionDefinitions.ActuatorNeededCoeffs[classLetter], classToActuatorCoeffFilenameDictionary[classLetter])
+            self.checkForNeededCoeffs(self.actuatorCoeffDirectory, classLetter, coeffCollectionDefinitions.ActuatorNeededCoeffs[classLetter], classToActuatorCoeffFilenameDictionary[classLetter])
+
+    def testActuatorSensorFiles(self):
+        for classLetter in classToActuatorCoeffFilenameDictionary:
+            self.checkSingleXmlId(classLetter, coeffCollectionDefinitions.AllowedSensorFiles[classLetter], classToActuatorCoeffFilenameDictionary[classLetter], 'SensorsFile')
 
     ####################################################################################
     #    Check that class coeff files only have coeffs that should be in them.         #
@@ -160,7 +196,7 @@ class coeffFileTests(unittest.TestCase):
     ####################################################################################
     def testClassEssentialCoeffs(self):
         for classLetter in classToActuatorCoeffFilenameDictionary:
-            self.checkForNeeded(self.classCoeffDirectory, classLetter, coeffCollectionDefinitions.ClassNeededCoeffs[classLetter], coeffCollectionDefinitions.AllowedClassFiles[classLetter])
+            self.checkForNeededCoeffs(self.classCoeffDirectory, classLetter, coeffCollectionDefinitions.ClassNeededCoeffs[classLetter], coeffCollectionDefinitions.AllowedClassFiles[classLetter])
 
     ####################################################################################
     #    Check that controller coeff files only have coeffs that should be in them.    #
@@ -184,7 +220,7 @@ class coeffFileTests(unittest.TestCase):
     def testControllerEssentialCoeffs(self):
         for classLetter in classToActuatorCoeffFilenameDictionary:
             for filename in coeffCollectionDefinitions.AllowedControllerFiles[classLetter]:
-                self.checkForNeeded(self.controllerCoeffDirectory, classLetter, coeffCollectionDefinitions.ControllerNeededCoeffs, filename)
+                self.checkForNeededCoeffs(self.controllerCoeffDirectory, classLetter, coeffCollectionDefinitions.ControllerNeededCoeffs, filename)
 
     ####################################################################################
     #    Check that location coeff files only have coeffs that should be in them.      #
@@ -208,7 +244,7 @@ class coeffFileTests(unittest.TestCase):
     def testLocationEssentialCoeffs(self):
         for classLetter in classToActuatorCoeffFilenameDictionary:
             for filename in coeffCollectionDefinitions.AllowedLocationFiles[classLetter]:
-                self.checkForNeeded(self.locationCoeffDirectory, classLetter, coeffCollectionDefinitions.LocationNeededCoeffs[classLetter], filename)
+                self.checkForNeededCoeffs(self.locationCoeffDirectory, classLetter, coeffCollectionDefinitions.LocationNeededCoeffs[classLetter], filename)
 
     ####################################################################################
     #    Check that mode coeff files only have coeffs that should be in them.          #
@@ -229,7 +265,7 @@ class coeffFileTests(unittest.TestCase):
     ####################################################################################
     def testModeEssentialCoeffs(self):
         for classLetter in classToActuatorCoeffFilenameDictionary:
-            self.checkForNeeded(self.modesCoeffDirectory, classLetter, coeffCollectionDefinitions.ModesNeededCoeffs, coeffCollectionDefinitions.AllowedModeFiles[classLetter])
+            self.checkForNeededCoeffs(self.modesCoeffDirectory, classLetter, coeffCollectionDefinitions.ModesNeededCoeffs, coeffCollectionDefinitions.AllowedModeFiles[classLetter])
 
     ####################################################################################
     #    Check that safety coeff files only have coeffs that should be in them.        #
@@ -250,7 +286,7 @@ class coeffFileTests(unittest.TestCase):
     ####################################################################################
     def testSafetyEssentialCoeffs(self):
         for classLetter in classToActuatorCoeffFilenameDictionary:
-            self.checkForNeeded(self.safetyCoeffDirectory, classLetter, coeffCollectionDefinitions.SafetyNeededCoeffs, coeffCollectionDefinitions.AllowedSafetyFiles[classLetter])
+            self.checkForNeededCoeffs(self.safetyCoeffDirectory, classLetter, coeffCollectionDefinitions.SafetyNeededCoeffs, coeffCollectionDefinitions.AllowedSafetyFiles[classLetter])
 
     ####################################################################################
     #    Check that sensor coeff files only have coeffs that should be in them.        #
@@ -271,4 +307,4 @@ class coeffFileTests(unittest.TestCase):
     ####################################################################################
     def testSensorEssentialCoeffs(self):
         for classLetter in classToActuatorCoeffFilenameDictionary:
-            self.checkForNeeded(self.sensorCoeffDirectory, classLetter, coeffCollectionDefinitions.SensorNeededCoeffs, coeffCollectionDefinitions.AllowedSensorFiles[classLetter])
+            self.checkForNeededCoeffs(self.sensorCoeffDirectory, classLetter, coeffCollectionDefinitions.SensorNeededCoeffs, coeffCollectionDefinitions.AllowedSensorFiles[classLetter])
