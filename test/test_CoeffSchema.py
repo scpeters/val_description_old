@@ -3,8 +3,8 @@
 import unittest
 import glob
 import os
-from val_description import CoeffSchemaDefinitions as coeffSchemaDefinition
-from val_description import CoeffCollectionDefinitions as coeffCollectionDefinition
+from val_description import CoeffSchemaDefinitions as coeffSchemaDefinitions
+from val_description import CoeffCollectionDefinitions as coeffCollectionDefinitions
 from lxml import etree as xmlParser
 import lxml
 import logging
