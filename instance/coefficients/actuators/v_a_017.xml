@@ -17,6 +17,6 @@
         <Coeff description="Electrical angle offset from Index pulse of Encoder" id="EncoderIndexOffset" value="2.8649225235" />
         <Coeff description="" id="JointOutputAPS_MountingGain" value="1.0" />
         <Coeff description="" id="SpringAPS_MountingGain" value="-1" />
-        <Coeff description="" id="SpringAPS_BitOffset" value="707969352" />
+        <Coeff description="" id="SpringAPS_BitOffset" value="707971818" />
     </Coeffs>
 </CoeffData>

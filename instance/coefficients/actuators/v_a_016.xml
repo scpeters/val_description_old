@@ -8,7 +8,7 @@
     <Coeffs>
         <Coeff description="" id="JointKinematicDir" value="-1.0" />
         <Coeff description="" id="PositionOffset_Rad" value="-0.955670036369" />
-        <Coeff description="" id="TorqueOffset_Nm" value="-5.61455841617" />
+        <Coeff description="" id="TorqueOffset_Nm" value="-4.76520374967" />
         <Coeff description="" id="JointSensors_MotorPosition" value="1" />
         <Coeff description="" id="JointSensors_OutputForce" value="2.0" />
         <Coeff description="" id="JointSensors_OutputPosition" value="2.0" />
@@ -17,6 +17,6 @@
         <Coeff description="Electrical angle offset from Index pulse of Encoder" id="EncoderIndexOffset" value="2.4530" />
         <Coeff description="" id="JointOutputAPS_MountingGain" value="1.0" />
         <Coeff description="" id="SpringAPS_MountingGain" value="-1" />
-        <Coeff description="" id="SpringAPS_BitOffset" value="232333263" />
+        <Coeff description="" id="SpringAPS_BitOffset" value="232421605" />
     </Coeffs>
 </CoeffData>
