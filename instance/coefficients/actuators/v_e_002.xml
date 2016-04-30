@@ -3,8 +3,12 @@
         <CalibrationDate/>
         <FileGenDate date="2014-12-19" time="11:13:39.494938"/>
     </Properties>
-    <ClassFile id="e.xml"/>
-    <ControllerFile id="e_futek_dh.xml"/>
+    <ClassFile id="e.xml">
+        <SubClassFile id="ankle_linear.xml" />
+    </ClassFile>
+    <ControllerFile id="e_dh.xml">
+        <SubControllerFile id="e_futek_dh.xml" />
+    </ControllerFile>
     <LocationFile id="ankle.xml"/>
     <SensorsFile id="sensors.xml"/>
     <SafetyFile id="safety.xml"/>
