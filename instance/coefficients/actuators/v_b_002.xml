@@ -26,7 +26,7 @@
         <Coeff id="JointSensors_OutputVelocity" value="1.0" />
         <Coeff id="JointTorqueLimit_Nm" value="300.0" />
         <Coeff id="PositionControl_MotorTorqueDirection" value="1.0" />
-        <Coeff id="PositionOffset_Rad" value="2.1153">
+        <Coeff id="PositionOffset_Rad" value="2.11612731142">
             <notes>Was 2.119
 Was 2.11613
 Was 2.1362244</notes>
