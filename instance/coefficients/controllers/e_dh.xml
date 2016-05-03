@@ -13,6 +13,7 @@
     <!-- - - - - - - - - Controllers - - - - - - - - -->
     <!-- Commutation -->
     <Coeff description="-1=master,0=six,1=4quad,2=sv,3=dh" value="3.0" id="Commutation_Select"/>
+    <Coeff description="" value="1.0" id="ForceControl_MotorForceDirection"/>
 
     <!-- Position Controller -->
     <Coeff description="" value="10000.0" id="PositionControl_Kp"/>

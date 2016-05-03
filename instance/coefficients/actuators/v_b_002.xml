@@ -5,12 +5,11 @@
     </Properties>
     <ClassFile id="b.xml" />
     <ControllerFile id="b_sv.xml" />
-    <LocationFile id="testbench.xml" />
+    <LocationFile id="hip_roll_left.xml" />
     <SensorsFile id="sensors.xml" />
     <SafetyFile id="safety.xml" />
     <ModeFile id="mode.xml" />
     <Coeffs>
-        <Coeff id="CurrentSafeLimit" value="20.0" />
         <Coeff id="EncMountingDir" value="-1.0" />
         <Coeff id="EncoderIndexOffset" value="5.66" />
         <Coeff id="JointKinematicDir" value="-1.0" />
@@ -26,16 +25,10 @@
         <Coeff id="JointSensors_OutputVelocity" value="1.0" />
         <Coeff id="JointTorqueLimit_Nm" value="300.0" />
         <Coeff id="PositionControl_MotorTorqueDirection" value="1.0" />
-        <Coeff id="PositionOffset_Rad" value="2.11612731142">
-            <notes>Was 2.119
-Was 2.11613
-Was 2.1362244</notes>
-        </Coeff>
+        <Coeff id="PositionOffset_Rad" value="2.11612731142" />
         <Coeff id="SpringAPS_BitOffset" value="94921038.0" />
         <Coeff id="SpringAPS_MountingGain" value="-1.0" />
         <Coeff id="TorqueControl_MotorTorqueDirection" value="1.0" />
-        <Coeff id="TorqueOffset_Nm" value="0.834">
-            <notes>Was 0.22</notes>
-        </Coeff>
+        <Coeff id="TorqueOffset_Nm" value="0.834" />
     </Coeffs>
 </CoeffData>

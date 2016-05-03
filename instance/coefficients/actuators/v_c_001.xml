@@ -5,12 +5,11 @@
     </Properties>
     <ClassFile id="c.xml"/>
     <ControllerFile id="c_sv.xml"/>
-    <LocationFile id="hip_pitch"/>
+    <LocationFile id="hip_pitch.xml"/>
     <SensorsFile id="sensors.xml"/>
     <SafetyFile id="safety.xml"/>
     <ModeFile id="mode.xml"/>
     <Coeffs>
-        <Coeff id="CurrentSafeLimit" value="20.0"/>
         <Coeff id="EncMountingDir" value="1.0"/>
         <Coeff id="EncoderIndexOffset" value="3.00530292234"/>
         <Coeff id="JointKinematicDir" value="1.0"/>
@@ -21,13 +20,9 @@
         <Coeff id="JointSensors_OutputForce" value="2.0"/>
         <Coeff id="JointSensors_OutputPosition" value="2.0"/>
         <Coeff id="JointSensors_OutputVelocity" value="1.0"/>
-        <Coeff id="JointTorqueLimit_Nm" value="225.0"/>
-        <Coeff id="PositionControl_MotorTorqueDirection" value="1.0"/>
-        <Coeff id="PositionOffset_Rad" value="0.0"/>
         <Coeff id="SpringAPS_BitOffset" value="221737085.0"/>
         <Coeff id="SpringAPS_MountingGain" value="-1.0"/>
         <Coeff id="TorqueControl_MotorTorqueDirection" value="1.0"/>
         <Coeff id="TorqueOffset_Nm" value="5.286"/>
-	<Coeff id="JointOutputAPS_BitOffset" value="7714" />
     </Coeffs>
 </CoeffData>
