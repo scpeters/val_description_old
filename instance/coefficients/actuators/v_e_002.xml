@@ -11,9 +11,9 @@
     <ModeFile id="mode.xml" />
     <Coeffs>
         <Coeff id="EncMountingDir" value="1.0" />
-        <Coeff id="EncoderIndexOffset" value="1.42756200637" />
+        <Coeff id="EncoderIndexOffset" value="4.56" />
         <Coeff id="ForceOffset_N" value="0.0"/>
-        <Coeff id="JointKinematicDir" value="1.0" />
+        <Coeff id="JointKinematicDir" value="-1.0" />
         <Coeff id="JointMaxValue" value="3.1415926" />
         <Coeff id="JointMinValue" value="-3.1415926" />
         <Coeff id="JointOutputAPS_MountingGain" value="-1.0" />
@@ -23,10 +23,10 @@
         <Coeff id="JointSensors_OutputForce" value="2.0" />
         <Coeff id="JointSensors_OutputPosition" value="3.0" />
         <Coeff id="JointSensors_OutputVelocity" value="1.0" />
-        <Coeff id="LoadCell_MountingGain" value="-1.0" />
+        <Coeff id="LoadCell_MountingGain" value="1.0" />
         <Coeff id="LoadCell_OffsetBits" value="33110.0" />
         <Coeff id="PositionOffset_Rad" value="-1.38211691132"/>
         <Coeff id="SpringAPS_BitOffset" value="4837580.0" />
-        <Coeff id="SpringAPS_MountingGain" value="-1.0" />
+        <Coeff id="SpringAPS_MountingGain" value="1.0" />
     </Coeffs>
 </CoeffData>
