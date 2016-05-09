@@ -169,6 +169,23 @@
     </xacro:revolute_joint_ex>
   </xacro:macro>
 
+    <xacro:macro name="make_lower_arm_mass_sim" params="prefix reflect lower_arm_root_link">
+    <xacro:standard_link name="${ForearmLinkName}"
+                    mass="${ForearmYawLinkMass}"
+                    origin_xyz="${ForearmYawLinkComPosition}"
+                    ixx="${ForearmYawLinkInertia_IXX}" ixy="${ForearmYawLinkInertia_IXY}" ixz="${ForearmYawLinkInertia_IXZ}"
+                    iyy="${ForearmYawLinkInertia_IYY}" iyz="${ForearmYawLinkInertia_IYZ}" izz="${ForearmYawLinkInertia_IZZ}"
+                    origin_rpy="0 0 0"
+                    visual_mesh="${mesh_root}/arms/${prefix}_elbow_mass_sim.dae"
+                    collision_mesh="${mesh_root}/arms/${prefix}_elbow_mass_sim.dae" />
+
+    <xacro:fixed_joint jointName="${ForearmYawJointName}"
+                          parent="${lower_arm_root_link}" child="${ForearmLinkName}"
+                          origin_xyz="${ForearmYawFrameOrigin_X} ${ForearmYawFrameOrigin_Y} ${ForearmYawFrameOrigin_Z}"
+                          origin_rpy="${ForearmYawFrameOrientation_Roll} ${ForearmYawFrameOrientation_Pitch} ${ForearmYawFrameOrientation_Yaw}">
+    </xacro:fixed_joint>
+  </xacro:macro>
+
   <xacro:macro name="make_arm" params="prefix reflect arm_root_link">
     <xacro:make_upper_arm prefix="${prefix}" reflect="${reflect}" upper_arm_root_link="${arm_root_link}" />
     <xacro:make_lower_arm prefix="${prefix}" reflect="${reflect}" lower_arm_root_link="${ElbowPitchLinkName}" />
@@ -176,6 +193,11 @@
 
   <xacro:macro name="make_arm_no_hands" params="prefix reflect arm_root_link">
     <xacro:make_upper_arm prefix="${prefix}" reflect="${reflect}" upper_arm_root_link="${arm_root_link}" />
+  </xacro:macro>
+
+  <xacro:macro name="make_arm_mass_sims" params="prefix reflect arm_root_link">
+    <xacro:make_upper_arm prefix="${prefix}" reflect="${reflect}" upper_arm_root_link="${arm_root_link}" />
+    <xacro:make_lower_arm_mass_sim prefix="${prefix}" reflect="${reflect}" lower_arm_root_link="${ElbowPitchLinkName}" />
   </xacro:macro>
 
   <xacro:macro name="arm_transmissions_hw" params="prefix reflect">
