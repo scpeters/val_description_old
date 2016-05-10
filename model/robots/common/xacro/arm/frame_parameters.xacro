@@ -41,6 +41,14 @@
   <xacro:property name="ForearmYawFrameOrientation_Pitch" value="0.0"/>
   <xacro:property name="ForearmYawFrameOrientation_Yaw" value="0.0"/>
 
+  <xacro:property name="ForearmMassSimFrameOrigin_X" value="0.0"/>
+  <xacro:property name="ForearmMassSimFrameOrigin_Y" value="0.0"/>
+  <xacro:property name="ForearmMassSimFrameOrigin_Z" value="0.0"/>
+
+  <xacro:property name="ForearmMassSimFrameOrientation_Roll" value="0.0"/>
+  <xacro:property name="ForearmMassSimFrameOrientation_Pitch" value="0.0"/>
+  <xacro:property name="ForearmMassSimFrameOrientation_Yaw" value="0.0"/>
+
   <xacro:property name="WristRollFrameOrigin_X" value="0.0"/>
   <xacro:property name="WristRollFrameOrigin_Y" value="${reflect * 0.2871}"/>
   <xacro:property name="WristRollFrameOrigin_Z" value="0.0"/>

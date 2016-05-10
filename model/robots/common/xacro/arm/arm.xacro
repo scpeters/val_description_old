@@ -171,18 +171,18 @@
 
     <xacro:macro name="make_lower_arm_mass_sim" params="prefix reflect lower_arm_root_link">
     <xacro:standard_link name="${ForearmLinkName}"
-                    mass="${ForearmYawLinkMass}"
-                    origin_xyz="${ForearmYawLinkComPosition}"
-                    ixx="${ForearmYawLinkInertia_IXX}" ixy="${ForearmYawLinkInertia_IXY}" ixz="${ForearmYawLinkInertia_IXZ}"
-                    iyy="${ForearmYawLinkInertia_IYY}" iyz="${ForearmYawLinkInertia_IYZ}" izz="${ForearmYawLinkInertia_IZZ}"
+                    mass="${ForearmMassSimLinkMass}"
+                    origin_xyz="${ForearmMassSimComPosition}"
+                    ixx="${ForearmMassSimInertia_IXX}" ixy="${ForearmMassSimInertia_IXY}" ixz="${ForearmMassSimInertia_IXZ}"
+                    iyy="${ForearmMassSimInertia_IYY}" iyz="${ForearmMassSimInertia_IYZ}" izz="${ForearmMassSimInertia_IZZ}"
                     origin_rpy="0 0 0"
                     visual_mesh="${mesh_root}/arms/${prefix}_elbow_mass_sim.dae"
                     collision_mesh="${mesh_root}/arms/${prefix}_elbow_mass_sim.dae" />
 
     <xacro:fixed_joint jointName="${ForearmYawJointName}"
                           parent="${lower_arm_root_link}" child="${ForearmLinkName}"
-                          origin_xyz="${ForearmYawFrameOrigin_X} ${ForearmYawFrameOrigin_Y} ${ForearmYawFrameOrigin_Z}"
-                          origin_rpy="${ForearmYawFrameOrientation_Roll} ${ForearmYawFrameOrientation_Pitch} ${ForearmYawFrameOrientation_Yaw}">
+                          origin_xyz="${ForearmMassSimFrameOrigin_X} ${ForearmMassSimFrameOrigin_Y} ${ForearmMassSimFrameOrigin_Z}"
+                          origin_rpy="${ForearmMassSimFrameOrientation_Roll} ${ForearmMassSimFrameOrientation_Pitch} ${ForearmMassSimFrameOrientation_Yaw}">
     </xacro:fixed_joint>
   </xacro:macro>
 
