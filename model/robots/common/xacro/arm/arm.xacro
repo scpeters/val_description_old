@@ -292,4 +292,11 @@
     <xacro:simple_position_transmission jointName="${WristPitchJointName}" actuatorName="${WristPitchActuatorSimName}" nodeName="${WristPitchActuatorSimNode}" actuatorApi="${SimApi}"/> 
   </xacro:macro>
 
+  <xacro:macro name="arm_transmissions_sim_no_hands" params="prefix">
+    <xacro:simple_transmission jointName="${ShoulderPitchJointName}" actuatorName="${ShoulderPitchActuatorName}" nodeName="${ShoulderPitchNode}" actuatorApi="${SimApi}"/>
+    <xacro:simple_transmission jointName="${ShoulderRollJointName}" actuatorName="${ShoulderRollActuatorName}" nodeName="${ShoulderRollNode}" actuatorApi="${SimApi}"/>
+    <xacro:simple_transmission jointName="${ShoulderYawJointName}" actuatorName="${ShoulderYawActuatorName}" nodeName="${ShoulderYawNode}" actuatorApi="${SimApi}"/>
+    <xacro:simple_transmission jointName="${ElbowPitchJointName}" actuatorName="${ElbowPitchActuatorName}" nodeName="${ElbowPitchNode}" actuatorApi="${SimApi}"/> 
+  </xacro:macro>
+
 </robot>

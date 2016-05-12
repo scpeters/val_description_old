@@ -23,8 +23,8 @@
     <xacro:waist_transmissions_sim />
     <xacro:leg_transmissions_sim prefix="left"/>
     <xacro:leg_transmissions_sim prefix="right"/>
-    <xacro:arm_transmissions_sim prefix="left"/>
-    <xacro:arm_transmissions_sim prefix="right"/>
+    <xacro:arm_transmissions_sim_no_hands prefix="left"/>
+    <xacro:arm_transmissions_sim_no_hands prefix="right"/>
     <xacro:neck_transmissions_sim />
 
 </robot>
