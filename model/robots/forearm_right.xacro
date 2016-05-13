@@ -16,7 +16,7 @@
     <xacro:make_middle_finger prefix="${prefix}" reflect="${reflect}" middle_finger_root_link="${prefix}Palm"/>
     <xacro:make_pinky_finger prefix="${prefix}" reflect="${reflect}" pinky_finger_root_link="${prefix}Palm"/>
     
-    <xacro:simple_forearm_position_transmission jointName="${ForearmYawActuatorName}" actuatorName="${ForearmYawActuatorName}" nodeName="${ForearmYawNode}" actuatorApi="${ForearmYawApi}" reflect="${reflect}"/> 
+    <xacro:simple_position_transmission jointName="${ForearmYawActuatorName}" actuatorName="${ForearmYawActuatorName}" nodeName="${ForearmYawNode}" actuatorApi="${ForearmYawApi}"/> 
     <xacro:index_finger_transmissions_hw prefix="${prefix}" reflect="${reflect}"/>
     <xacro:middle_finger_transmissions_hw prefix="${prefix}" reflect="${reflect}"/>
     <xacro:pinky_finger_transmissions_hw prefix="${prefix}" reflect="${reflect}"/>

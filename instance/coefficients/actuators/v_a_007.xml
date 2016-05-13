@@ -17,7 +17,7 @@
         <Coeff id="JointKinematicDir" value="-1.0" />
         <Coeff id="JointSafety_LimitZone_Rad" value="0.07" />
         <Coeff id="SpringAPS_BitOffset" value="535262183.0" />
-        <Coeff id="TorqueOffset_Nm" value="-0.639018143713" />
-        <Coeff id="PositionOffset_Rad" value="-1.13514580898" />
+        <Coeff id="TorqueOffset_Nm" value="-0.816559630369" />
+        <Coeff id="PositionOffset_Rad" value="-1.13821365911" />
     </Coeffs>
 </CoeffData>

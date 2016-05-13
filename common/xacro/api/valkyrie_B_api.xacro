@@ -20,8 +20,8 @@
     <xacro:property name="UpperNeckPitchApi" value="robot_hardware_interface/TurbodriverAPI" />
 
     <xacro:property name="TrunkYawApi" value="robot_hardware_interface/TurbodriverAPI" />
-    <xacro:property name="WaistLeftActuatorApi" value="robot_hardware_interface/TurbodriverAPI_linear_futek" />
-    <xacro:property name="WaistRightActuatorApi" value="robot_hardware_interface/TurbodriverAPI_linear_futek" />
+    <xacro:property name="WaistLeftActuatorApi" value="robot_hardware_interface/TurbodriverAPI_linear_Renishaw" />
+    <xacro:property name="WaistRightActuatorApi" value="robot_hardware_interface/TurbodriverAPI_linear_Renishaw" />
 
     <xacro:property name="AtiSensorApi" value="TurbodriverForceTorqueSensor" />
     <xacro:property name="ImuMicrostrainHardwareApi" value="val_imu_3dm_gx4_15_interface/Imu3dmGx415Interface" />
