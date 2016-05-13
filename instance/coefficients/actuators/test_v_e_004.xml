@@ -1,8 +1,4 @@
 <CoeffData>
-    <Properties>
-        <CalibrationDate />
-        <FileGenDate date="2013-11-15" time="09:57:38.068696" />
-    </Properties>
     <ClassFile id="test_e.xml">
         <SubClassFile id="test_trunk_linear.xml"/>
     </ClassFile>

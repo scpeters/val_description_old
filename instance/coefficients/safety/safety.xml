@@ -1,8 +1,4 @@
 <CoeffData>
-  <Properties>
-    <CalibrationDate/>
-    <FileGenDate date="2014-11-26" time="13:45:07.321642"/>
-  </Properties>
   <Coeffs>
     <Coeff id="APS1DriftSafeLimit" value="9999.0"/>
     <Coeff id="CommTimeoutMs" value="80.0"/>

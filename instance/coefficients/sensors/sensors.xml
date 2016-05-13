@@ -1,8 +1,4 @@
 <CoeffData>
-  <Properties>
-    <CalibrationDate/>
-    <FileGenDate date="2013-10-25" time="21:34:25.478158"/>
-  </Properties>
   <Coeffs>
     <Coeff id="BusVoltage_BitOffset" value="2048.0"/>
     <Coeff id="BusVoltage_SensorGain" value="0.163412"/>

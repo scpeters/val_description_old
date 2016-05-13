@@ -1,6 +1,7 @@
 <CoeffData>
   <Coeffs>
     <!-- Torque Controller -->
+        <Coeff id="Commutation_Select" value="3.0"/>
         <Coeff id="EffortControl_OnlineTuning" value="0.0"/>
         <Coeff id="EffortControl_Alpha" value="0.93"/>
         <Coeff id="EffortControl_AlphaDot" value="0.45"/>
