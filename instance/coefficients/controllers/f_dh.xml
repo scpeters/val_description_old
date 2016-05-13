@@ -19,6 +19,7 @@
         <!-- FF -->
         <Coeff description="" value="1" id="TorqueControl_enableFF"/>
         <Coeff description="" value="0.0375" id="TorqueControl_Current2MotorTorque"/>
+        <Coeff id="TorqueControl_MotorTorqueDirection" value="1.0" />
 
         <!-- PID -->
         <Coeff description="" value="1" id="TorqueControl_enablePID"/>

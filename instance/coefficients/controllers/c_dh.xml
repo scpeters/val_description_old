@@ -10,6 +10,7 @@
     <Coeff description="" value="50.0" id="TorqueControl_b"/>
     <Coeff description="" value="0.05" id="TorqueControl_Current2MotorTorque"/>
     <Coeff description="" value="1" id="TorqueControl_enableFF"/>
+    <Coeff id="TorqueControl_MotorTorqueDirection" value="1.0" />
     <Coeff description="" value="1" id="TorqueControl_enablePID"/>
     <Coeff description="" value="6.99" id="TorqueControl_Kp"/>
     <Coeff description="" value="0.95" id="TorqueControl_PD_damp"/>

@@ -281,7 +281,17 @@ AllowedSafetyFiles = {"a": "safety.xml",
                       "h_athena2": None
                       }
 
-ControllerNeededCoeffs = ["Commutation_Select"]
+ControllerNeededCoeffs = {"a": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
+                          "b": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
+                          "c": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
+                          "d": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
+                          "e": ["Commutation_Select", "ForceControl_Current2MotorForce", "ForceControl_SensorFeedback"],
+                          "f": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
+                          "g": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
+                          "h_athena1": [None],
+                          "h_athena2": [None]
+                          }
+
 
 ModesNeededCoeffs = []
 

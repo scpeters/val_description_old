@@ -176,7 +176,7 @@ controller_coeffs_definition = \
     <xs:enumeration value="EffortControl_Alpha"/>
     <xs:enumeration value="EffortControl_AlphaDot"/>
     <xs:enumeration value="EffortControl_OnlineTuning"/>
-
+    <xs:enumeration value="TorqueControl_MotorTorqueDirection"/>
     <xs:enumeration value="ForceControl_m"/>
     <xs:enumeration value="ForceControl_b"/>
     <xs:enumeration value="ForceControl_Current2MotorForce"/>

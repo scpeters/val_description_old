@@ -9,6 +9,7 @@
     <Coeff id="SpaceVector_CurrentToSV" value="1.0"/>
     <Coeff id="SpaceVector_MaxNormVoltage" value="0.666"/>
     <Coeff id="TorqueControl_Current2MotorTorque" value="0.025"/>
+    <Coeff id="TorqueControl_MotorTorqueDirection" value="1.0" />
     <Coeff id="TorqueControl_FFd_fc_Hz" value="40.0"/>
     <Coeff id="TorqueControl_Kd" value="0.0339"/>
     <Coeff id="TorqueControl_Kd_fc_Hz" value="100.0"/>

@@ -223,11 +223,11 @@ class coeffFileTests(unittest.TestCase):
     def testControllerEssentialCoeffs(self):
         for classLetter in classToActuatorCoeffFilenameDictionary:
             for filename in coeffCollectionDefinitions.AllowedControllerFiles[classLetter]:
-                self.checkForNeededCoeffs(self.controllerCoeffDirectory, classLetter, coeffCollectionDefinitions.ControllerNeededCoeffs, filename)
+                self.checkForNeededCoeffs(self.controllerCoeffDirectory, classLetter, coeffCollectionDefinitions.ControllerNeededCoeffs[classLetter], filename)
 
-    ####################################################################################
-    #    Check that location coeff files only have coeffs that should be in them.      #
-    ####################################################################################
+        ####################################################################################
+        #    Check that location coeff files only have coeffs that should be in them.      #
+        ####################################################################################
     def testLocationCoeffsValidSchema(self):
         # Assemble the schema
         for classLetter in classToActuatorCoeffFilenameDictionary:

@@ -8,6 +8,7 @@
     <Coeff id="PositionControl_Kp" value="400.0"/>
     <Coeff id="PositionControl_SensorFeedback" value="4.0"/>
     <Coeff id="TorqueControl_Current2MotorTorque" value="0.06"/>
+    <Coeff id="TorqueControl_MotorTorqueDirection" value="1.0" />
     <Coeff id="TorqueControl_FFd_fc_Hz" value="20.0"/>
     <Coeff id="TorqueControl_Kd" value="0.015"/>
     <Coeff id="TorqueControl_Kd_fc_Hz" value="50.0"/>
