@@ -6,7 +6,6 @@
     <SafetyFile id="safety.xml"/>
     <ModeFile id="mode.xml"/>
     <Coeffs>
-        <Coeff id="CurrentSafeLimit" value="25.0"/>
         <Coeff id="EncMountingDir" value="1.0"/>
         <Coeff id="EncoderIndexOffset" value="6.215"/>
         <Coeff id="JointKinematicDir" value="-1.0"/>

@@ -6,6 +6,8 @@
     <Coeff id="CurrentSafeLimit" value="17.0"/>
     <Coeff id="EncoderCPR" value="442.0"/>
     <Coeff id="FluxLinkage" value="0.0"/>
+    <Coeff id="JointMaxValue" value="3.1415"/>
+    <Coeff id="JointMinValue" value="-3.1415"/>
     <Coeff id="Inductance_DAxis" value="0.0009"/>
     <Coeff id="Inductance_QAxis" value="0.00139"/>
     <Coeff id="JointForceLimit_N" value="4500.0"/>

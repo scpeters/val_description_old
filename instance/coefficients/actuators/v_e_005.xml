@@ -6,7 +6,6 @@
     <SafetyFile id="safety.xml"/>
     <ModeFile id="mode.xml"/>
     <Coeffs>
-        <Coeff id="APS1_BiasComp_Enable" value="1.0"/>
         <Coeff id="EncMountingDir" value="1.0"/>
         <Coeff id="EncoderIndexOffset" value="4.6"/>
         <Coeff id="ForceOffset_N" value="0.0"/>
