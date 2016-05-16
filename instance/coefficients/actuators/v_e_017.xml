@@ -1,8 +1,4 @@
 <CoeffData>
-    <Properties>
-        <CalibrationDate />
-        <FileGenDate date="2013-11-15" time="09:57:38.068696" />
-    </Properties>
     <ClassFile id="e.xml">
         <SubClassFile id="ankle_linear.xml" />
     </ClassFile>
@@ -14,14 +10,10 @@
     <SafetyFile id="safety.xml" />
     <ModeFile id="mode.xml" />
     <Coeffs>
-        <Coeff id="APS1_BiasComp_Enable" value="0.0" />
         <Coeff id="EncMountingDir" value="1.0" />
         <Coeff id="EncoderIndexOffset" value="6.14" />
-        <Coeff id="ForceControl_MotorForceDirection" value="1.0" />
-        <Coeff id="ForceOffset_N" value="-29.3723716735" />
+        <Coeff id="ForceOffset_N" value="-60.6778907775" />
         <Coeff id="JointKinematicDir" value="-1.0" />
-        <Coeff id="JointMaxValue" value="3.14159" />
-        <Coeff id="JointMinValue" value="-3.14159" />
         <Coeff id="JointSafety_LimitZone_m" value="0.0005" />
         <Coeff id="JointSensors_LinearPosition" value="2.0" />
         <Coeff id="JointSensors_LinearVelocity" value="2.0" />
@@ -31,7 +23,7 @@
         <Coeff id="JointSensors_OutputVelocity" value="1.0" />
         <Coeff id="LoadCell_MountingGain" value="1.0" />
         <Coeff id="LoadCell_OffsetBits" value="32950.0" />
-        <Coeff id="PositionOffset_Rad" value="2.03482526931" />
+        <Coeff id="PositionOffset_Rad" value="2.02178663405" />
         <Coeff id="JointOutputAPS_MountingGain" value="-1.0" />
         <Coeff id="SpringAPS_BitOffset" value="5035960.0" />
         <Coeff id="SpringAPS_MountingGain" value="1.0" />

@@ -1,9 +1,5 @@
 <!-- This file is for unit testing only -->
 <CoeffData>
-    <Properties>
-        <CalibrationDate/>
-        <FileGenDate date="2014-12-19" time="11:13:39.491436"/>
-    </Properties>
     <ClassFile id="test_e.xml">
         <SubClassFile id="test_ankle_linear.xml"/>
     </ClassFile>

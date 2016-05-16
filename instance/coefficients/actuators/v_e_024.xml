@@ -1,8 +1,4 @@
 <CoeffData>
-    <Properties>
-        <CalibrationDate />
-        <FileGenDate date="2013-11-15" time="09:57:38.068696" />
-    </Properties>
     <ClassFile id="e.xml">
         <SubClassFile id="trunk_linear.xml"/>
     </ClassFile>
@@ -14,17 +10,11 @@
     <SafetyFile id="safety.xml" />
     <ModeFile id="mode.xml" />
     <Coeffs>
-        <Coeff id="APS1_BiasComp_Enable" value="0.0" />
         <Coeff id="EncMountingDir" value="1.0" />
         <Coeff id="EncoderIndexOffset" value="5.08992910385" />
-        <Coeff id="ForceControl_MotorForceDirection" value="1.0" />
-        <Coeff id="ForceOffset_N" value="77.7948514224" />
+        <Coeff id="ForceOffset_N" value="28.843053937" />
         <Coeff id="JointKinematicDir" value="-1.0" />
-        <Coeff id="JointMaxValue" value="3.14159" />
-        <Coeff id="JointMinValue" value="-3.14159" />
-        <Coeff id="JointSafety_LimitZone_m" value="0.0005" />
-        <Coeff id="JointSafety_LowerLimit_m" value="-0.09" />
-        <Coeff id="JointSafety_UpperLimit_m" value="0.09" />
+        <Coeff id="JointSafety_LimitZone_m" value="0.0005"/>
         <Coeff id="JointSensors_LinearPosition" value="2.0" />
         <Coeff id="JointSensors_LinearVelocity" value="2.0" />
         <Coeff id="JointSensors_MotorPosition" value="1.0" />

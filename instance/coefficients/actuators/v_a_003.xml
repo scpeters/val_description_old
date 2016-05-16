@@ -1,8 +1,4 @@
 <CoeffData>
-    <Properties>
-        <CalibrationDate/>
-        <FileGenDate date="2014-12-19" time="11:08:57.960435"/>
-    </Properties>
     <ClassFile id="a.xml"/>
     <ControllerFile id="a_sv.xml"/>
     <LocationFile id="hip_yaw_right.xml"/>
@@ -13,8 +9,6 @@
         <Coeff id="EncMountingDir" value="1.0"/>
         <Coeff id="EncoderIndexOffset" value="6.03662561558"/>
         <Coeff id="JointKinematicDir" value="-1.0"/>
-        <Coeff id="JointMaxValue" value="3.14159265359"/>
-        <Coeff id="JointMinValue" value="-3.14159265359"/>
         <Coeff id="JointOutputAPS_MountingGain" value="-1.0"/>
         <Coeff id="JointSensors_MotorPosition" value="1.0"/>
         <Coeff id="JointSensors_OutputForce" value="2.0"/>

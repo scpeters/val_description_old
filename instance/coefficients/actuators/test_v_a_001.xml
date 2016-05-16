@@ -1,9 +1,5 @@
 <!-- This file is for unit testing only -->
 <CoeffData>
-    <Properties>
-      <CalibrationDate/>
-      <FileGenDate date="2014-12-19" time="11:13:39.501828"/>
-    </Properties>
     <ClassFile id="test_a.xml" />
     <ControllerFile id="test_a_sv.xml" />
     <LocationFile id="testbench.xml"/>

@@ -1,8 +1,4 @@
 <CoeffData>
-  <Properties>
-    <CalibrationDate/>
-    <FileGenDate date="2014-09-06" time="15:42:53.585575"/>
-  </Properties>
   <Coeffs>
     <Coeff id="Commutation_Select" value="2.0"/>
     <Coeff id="CurrVelFilter_fc_Hz" value="200.0"/>

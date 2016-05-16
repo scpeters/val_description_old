@@ -37,6 +37,15 @@
   <xacro:property name="ElbowPitchLinkInertia_IYZ" value="-0.000423865" />
   <xacro:property name="ElbowPitchLinkInertia_IZZ" value="0.003011283" />
 
+  <xacro:property name="ForearmMassSimLinkMass" value="6.03" />
+  <xacro:property name="ForearmMassSimComPosition" value="-0.010000  ${reflect*0.13} 0.019564" />
+  <xacro:property name="ForearmMassSimInertia_IXX" value="0.011755430" />
+  <xacro:property name="ForearmMassSimInertia_IXY" value="${reflect*0.001300853}" />
+  <xacro:property name="ForearmMassSimInertia_IXZ" value="-0.000727141" />
+  <xacro:property name="ForearmMassSimInertia_IYY" value="0.005071567" />
+  <xacro:property name="ForearmMassSimInertia_IYZ" value="${reflect*0.001695416}" />
+  <xacro:property name="ForearmMassSimInertia_IZZ" value="0.011365657" />
+
   <xacro:property name="ForearmYawLinkMass" value="2.476" />
   <xacro:property name="ForearmYawLinkComPosition" value="0.015000	${reflect*0.13} 0.019564" />
   <xacro:property name="ForearmYawLinkInertia_IXX" value="0.011755430" />

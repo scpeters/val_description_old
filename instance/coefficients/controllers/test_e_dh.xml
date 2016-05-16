@@ -1,8 +1,4 @@
 <CoeffData>
-  <Properties>
-    <CalibrationDate/>
-    <FileGenDate date="2013-10-10" time="10:45:58.718048"/>
-  </Properties>
   <Coeffs>
     <!-- - - - - - - - - Filtering - - - - - - - - -->
     <Coeff id="JointVelFilter_fc_Hz" value="1000.0"/>
@@ -19,15 +15,7 @@
     <Coeff description="" value="20.0" id="PositionControl_Kd"/>
     <Coeff id="PositionControl_Kd_fc_Hz" value="200.0"/>
     <Coeff description="2 - HarmAPS, 3 - JointAPS" value="4" id="PositionControl_SensorFeedback"/>
-    <!-- end Position Controller -->
-  </Coeffs>
-
-    <!-- Position -->
-    <Coeff description="" value="20" id="PositionControl_Kd"/>
-    <Coeff description="" value="200" id="PositionControl_Kd_fc_Hz"/>
     <Coeff description="" value="0" id="PositionControl_Ki"/>
-    <Coeff description="" value="10000.0" id="PositionControl_Kp"/>
     <Coeff description="" value="-1" id="PositionControl_MotorTorqueDirection"/>
-    <Coeff description="" value="4" id="PositionControl_SensorFeedback"/>
-
+</Coeffs>
 </CoeffData>
