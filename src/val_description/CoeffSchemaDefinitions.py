@@ -194,6 +194,7 @@ controller_coeffs_definition = \
     <xs:enumeration value="ForceControl_enableDynFF"/>
     <xs:enumeration value="ForceControl_ParallelDamping"/>
     <xs:enumeration value="ForceControl_SensorFeedback"/>
+    <xs:enumeration value="ForceControl_MotorForceDirection"/>
   </xs:restriction>
 </xs:simpleType>
 '''
