@@ -19,7 +19,7 @@
     <Coeff description="" value="20.0" id="PositionControl_Kd"/>
     <Coeff id="PositionControl_Kd_fc_Hz" value="200.0"/>
     <Coeff description="2 - HarmAPS, 3 - JointAPS" value="4" id="PositionControl_SensorFeedback"/>
-    <Coeff description="" value="-1" id="PositionControl_MotorTorqueDirection"/>
+    <Coeff id="ForceControl_MotorForceDirection" value="1.0"/>
     <!-- end Position Controller -->
   </Coeffs>
 

@@ -285,7 +285,7 @@ ControllerNeededCoeffs = {"a": ["Commutation_Select", "TorqueControl_MotorTorque
                           "b": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
                           "c": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
                           "d": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
-                          "e": ["Commutation_Select", "ForceControl_Current2MotorForce", "ForceControl_SensorFeedback"],
+                          "e": ["Commutation_Select", "ForceControl_Current2MotorForce", "ForceControl_SensorFeedback", "ForceControl_MotorForceDirection"],
                           "f": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
                           "g": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
                           "h_athena1": [None],
