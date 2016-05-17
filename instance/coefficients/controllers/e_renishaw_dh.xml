@@ -36,6 +36,7 @@
 
         <!-- Sensor Feedback -->
         <Coeff id="ForceControl_SensorFeedback" value="0.0"/>
+        <Coeff id="ForceControl_MotorForceDirection" value="1.0"/>
   </Coeffs>
 
 </CoeffData>
