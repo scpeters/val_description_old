@@ -5,7 +5,7 @@
     </Properties>
     <ClassFile id="a.xml"/>
     <ControllerFile id="a_sv.xml"/>
-    <LocationFile id="testbench.xml"/>
+    <LocationFile id="shoulder_pitch.xml"/>
     <SensorsFile id="sensors.xml"/>
     <SafetyFile id="safety.xml"/>
     <ModeFile id="mode.xml"/>
@@ -28,16 +28,10 @@
         <Coeff id="PositionControl_Input_fc_Hz" value="30.0"/>
         <Coeff id="PositionControl_MotorTorqueDirection" value="1.0"/>
         <Coeff id="PositionControl_enableInLPF" value="1.0"/>
-        <Coeff id="PositionOffset_Rad" value="-1.1881">
-            <notes>Was -1.228
-Was -1.22105
-Was -1.22</notes>
-        </Coeff>
-        <Coeff id="SpringAPS_BitOffset" value="472839000.0"/>
+        <Coeff id="PositionOffset_Rad" value="-1.1881"/>
+        <Coeff id="SpringAPS_BitOffset" value="1009651439"/>
         <Coeff id="SpringAPS_MountingGain" value="-1.0"/>
         <Coeff id="TorqueControl_MotorTorqueDirection" value="1.0"/>
-        <Coeff id="TorqueOffset_Nm" value="5.86">
-            <notes>Was 3.13, 5.225, 4.7, 5.6</notes>
-        </Coeff>
+        <Coeff id="TorqueOffset_Nm" value="0.0"/>
     </Coeffs>
 </CoeffData>

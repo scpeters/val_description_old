@@ -5,7 +5,7 @@
     </Properties>
     <ClassFile id="c.xml"/>
     <ControllerFile id="c_sv.xml"/>
-    <LocationFile id="testbench.xml"/>
+    <LocationFile id="hip_pitch.xml"/>
     <SensorsFile id="sensors.xml"/>
     <SafetyFile id="safety.xml"/>
     <ModeFile id="mode.xml"/>
@@ -26,7 +26,7 @@
         <Coeff id="JointSensors_OutputVelocity" value="1.0"/>
         <Coeff id="JointTorqueLimit_Nm" value="225.0"/>
         <Coeff id="PositionControl_MotorTorqueDirection" value="1.0"/>
-        <Coeff id="PositionOffset_Rad" value="-1.5262">
+        <Coeff id="PositionOffset_Rad" value="1.52">
             <notes>Was -1.5326
 Was -1.52554
 Was -1.54472</notes>

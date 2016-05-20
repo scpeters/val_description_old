@@ -60,7 +60,7 @@ class InstanceFileHandler():
             self.devices.append(device)
 
         for mechanism in self.mechanisms:
-            if mechanism.get('type') == 'simple':
+            if mechanism.get('type') == 'simple' or mechanism.get('type') == 'forearm':
                 self.serialNumbers.append(
                     mechanism.find('SerialNumber').get('id'))
             elif mechanism.get('type') == 'complex':
@@ -78,6 +78,11 @@ class InstanceFileHandler():
             elif mechanism.get('type') == 'complex':
                 for actuator in mechanism.findall('Actuator'):
                     self.nodes.append(actuator.find('Node').get('id'))
+            elif mechanism.get('type') == 'forearm':
+                athenaNodesRoot = mechanism.find('Nodes')
+                self.nodes.append(athenaNodesRoot.find('Athena1').get('id'))
+                self.nodes.append(athenaNodesRoot.find('Athena2').get('id'))
+
             else:
                 msg = 'Invalid mechanism type in instance file!'
                 self.logger.error(msg)
@@ -87,6 +92,7 @@ class InstanceFileHandler():
         self.configDictionary = {}
         self.nodeCoeffFileDictionary = {}
         self.actuatorNameCoeffFileDictionary = {}
+        self.forearmCoeffDictionary = {}
         for mechanism in self.mechanisms:
             if mechanism.get('type') == 'simple':
                 tmpNode = mechanism.find('Node').get('id')
@@ -105,107 +111,156 @@ class InstanceFileHandler():
                     self.nodeCoeffFileDictionary[tmpNode] = tmpActuatorCoeffFile
                     self.actuatorNameCoeffFileDictionary[actuator.get('id')] = tmpActuatorCoeffFile
 
+            elif mechanism.get('type') == 'forearm':
+                athenaSerialNumber = mechanism.find(
+                    'SerialNumber').get('id')
+
+                athena1CoeffFile = athenaSerialNumber + "_athena1.xml"
+                athena2CoeffFile = athenaSerialNumber + "_athena2.xml"
+
+                athena1CoeffDictionary = {}
+                athena2CoeffDictionary = {}
+
+                athena1CoeffDictionary = self.loadXMLCoeffs(athena1CoeffFile)
+                athena2CoeffDictionary = self.loadXMLCoeffs(athena2CoeffFile)
+
+                if not athena1CoeffDictionary or not athena2CoeffDictionary:
+                    self.logger.error('Skipping athenas because coeff dictionaries are empty, check your instance file and coeff files!')
+                    continue
+
+                self.forearmCoeffDictionary[mechanism.find('Nodes').find('Athena1').get('id')] = {}
+                for coeff, coeffDictionary in athena1CoeffDictionary.iteritems():
+                    self.forearmCoeffDictionary[mechanism.find('Nodes').find('Athena1').get('id')][coeff] = coeffDictionary['value']
+
+                self.forearmCoeffDictionary[mechanism.find('Nodes').find('Athena2').get('id')] = {}
+                for coeff, coeffDictionary in athena2CoeffDictionary.iteritems():
+                    self.forearmCoeffDictionary[mechanism.find('Nodes').find('Athena2').get('id')][coeff] = coeffDictionary['value']
+
             else:
                 msg = 'Invalid mechanism type'
                 self.logger.error(msg)
                 raise Exception(msg)
 
-            for node in self.nodeCoeffFileDictionary:
-                actuatorCoeffFile = self.nodeCoeffFileDictionary[node]
-                try:
-                    actuatorFullFilePath = self.actuatorFileCoeffPath + \
-                        "/" + actuatorCoeffFile
-                    actuatorXmlCoeffFile = xmlParser.parse(actuatorFullFilePath)
-                except IOError:
-                    msg = 'Actuator coeff file %s does not exist' % (actuatorFullFilePath)
-                    self.logger.warn(msg)
-                    continue
-                except xmlParser.ParseError:
-                    msg = 'Invalid XML in file %s' % (actuatorFullFilePath)
-                    self.logger.error(msg)
-                    raise Exception(msg)
+        for node in self.nodeCoeffFileDictionary:
+            actuatorCoeffFile = self.nodeCoeffFileDictionary[node]
+            try:
+                actuatorFullFilePath = self.actuatorFileCoeffPath + \
+                    "/" + actuatorCoeffFile
+                actuatorXmlCoeffFile = xmlParser.parse(actuatorFullFilePath)
+            except IOError:
+                msg = 'Actuator coeff file %s does not exist' % (actuatorFullFilePath)
+                self.logger.warn(msg)
+                continue
+            except xmlParser.ParseError:
+                msg = 'Invalid XML in file %s' % (actuatorFullFilePath)
+                self.logger.error(msg)
+                raise Exception(msg)
 
-                self.configDictionary[node] = {}
-                self.configDictionary[node]['configFiles'] = []
+            self.configDictionary[node] = {}
+            self.configDictionary[node]['configFiles'] = []
 
+            try:
+                actuatorClassFile = actuatorXmlCoeffFile.find('ClassFile').get('id')
                 try:
-                    actuatorClassFile = actuatorXmlCoeffFile.find('ClassFile').get('id')
+                    actuatorSubClassFile = actuatorXmlCoeffFile.find('ClassFile').find('SubClassFile').get('id')
+                    msg = 'Found SubClassFile ' + actuatorSubClassFile + '!'
+                    self.logger.info(msg)
                 except AttributeError:
-                    msg = 'ClassFile tag does not exist or is misspelled in actuator coeff file!'
-                    self.logger.error(msg)
-                    raise Exception(msg)
+                    actuatorSubClassFile = None
+                    # Coeffs are not required to specify a subclass
+                    
+            except AttributeError:
+                msg = 'ClassFile tag does not exist or is misspelled in actuator coeff file!'
+                self.logger.error(msg)
+                raise Exception(msg)
 
+            try:
+                actuatorControllerFile = actuatorXmlCoeffFile.find('ControllerFile').get('id')
                 try:
-                    actuatorControllerFile = actuatorXmlCoeffFile.find('ControllerFile').get('id')
+                    actuatorSubControllerFile = actuatorXmlCoeffFile.find('ControllerFile').find('SubControllerFile').get('id')
+                    msg = 'Found SubControllerFile ' + actuatorSubControllerFile + '!'
+                    self.logger.info(msg)
                 except AttributeError:
-                    msg = 'ControllerFile tag does not exist or is misspelled in actuator coeff file!'
-                    self.logger.error(msg)
-                    raise Exception(msg)
+                    # Coeffs are not required to specify a subclass
+                    actuatorSubControllerFile = None
+            except AttributeError:
+                msg = 'ControllerFile tag does not exist or is misspelled in actuator coeff file!'
+                self.logger.error(msg)
+                raise Exception(msg)
 
-                try:
-                    actuatorLocationFile = actuatorXmlCoeffFile.find('LocationFile').get('id')
-                except AttributeError:
-                    msg = 'LocationFile tag does not exist or is misspelled in actuator coeff file!'
-                    self.logger.error(msg)
-                    raise Exception(msg)
+            try:
+                actuatorLocationFile = actuatorXmlCoeffFile.find('LocationFile').get('id')
+            except AttributeError:
+                msg = 'LocationFile tag does not exist or is misspelled in actuator coeff file!'
+                self.logger.error(msg)
+                raise Exception(msg)
 
-                try:
-                    actuatorSensorsFile = actuatorXmlCoeffFile.find('SensorsFile').get('id')
-                except AttributeError:
-                    msg = 'SensorFile tag does not exist or is misspelled in actuator coeff file!'
-                    self.logger.error(msg)
-                    raise Exception(msg)
+            try:
+                actuatorSensorsFile = actuatorXmlCoeffFile.find('SensorsFile').get('id')
+            except AttributeError:
+                msg = 'SensorFile tag does not exist or is misspelled in actuator coeff file!'
+                self.logger.error(msg)
+                raise Exception(msg)
 
-                try:
-                    actuatorSafetyFile = actuatorXmlCoeffFile.find(
-                        'SafetyFile').get('id')
-                except AttributeError:
-                    msg = 'SafetyFile tag does not exist or is misspelled in actuator coeff file!'
-                    self.logger.error(msg)
-                    raise Exception(msg)
+            try:
+                actuatorSafetyFile = actuatorXmlCoeffFile.find(
+                    'SafetyFile').get('id')
+            except AttributeError:
+                msg = 'SafetyFile tag does not exist or is misspelled in actuator coeff file!'
+                self.logger.error(msg)
+                raise Exception(msg)
 
-                try:
-                    actuatorModeFile = actuatorXmlCoeffFile.find(
-                        'ModeFile').get('id')
-                except AttributeError:
-                    msg = 'ModeFile tag does not exist or is misspelled in actuator coeff file!'
-                    self.logger.error(msg)
-                    raise Exception(msg)
+            try:
+                actuatorModeFile = actuatorXmlCoeffFile.find(
+                    'ModeFile').get('id')
+            except AttributeError:
+                msg = 'ModeFile tag does not exist or is misspelled in actuator coeff file!'
+                self.logger.error(msg)
+                raise Exception(msg)
 
+            self.configDictionary[node][
+                'configFiles'].append(actuatorCoeffFile)
+            self.configDictionary[node][
+                'configFiles'].append(actuatorClassFile)
+            if actuatorSubClassFile:
                 self.configDictionary[node][
-                    'configFiles'].append(actuatorCoeffFile)
+                    'configFiles'].append(actuatorSubClassFile)
+            self.configDictionary[node][
+                'configFiles'].append(actuatorControllerFile)
+            if actuatorSubControllerFile:
                 self.configDictionary[node][
-                    'configFiles'].append(actuatorClassFile)
-                self.configDictionary[node][
-                    'configFiles'].append(actuatorControllerFile)
-                self.configDictionary[node][
-                    'configFiles'].append(actuatorLocationFile)
-                self.configDictionary[node][
-                    'configFiles'].append(actuatorSensorsFile)
-                self.configDictionary[node][
-                    'configFiles'].append(actuatorSafetyFile)
-                self.configDictionary[node]['configFiles'].append(actuatorModeFile)
+                    'configFiles'].append(actuatorSubControllerFile)
+            self.configDictionary[node][
+                'configFiles'].append(actuatorLocationFile)
+            self.configDictionary[node][
+                'configFiles'].append(actuatorSensorsFile)
+            self.configDictionary[node][
+                'configFiles'].append(actuatorSafetyFile)
+            self.configDictionary[node]['configFiles'].append(actuatorModeFile)
 
-                try:
-                    classFullFilePath = self.classFileCoeffPath + \
-                        "/" + actuatorClassFile
-                    classXmlCoeffFile = xmlParser.parse(classFullFilePath)
-                except IOError:
-                    self.logger.warn('Class coeff file %s does not exist' % (classFullFilePath))
-                    continue
-                except xmlParser.ParseError:
-                    msg = 'Invalid XML in file %s' % (classFullFilePath)
-                    self.logger.error(msg)
-                    raise Exception(msg)
+            try:
+                classFullFilePath = self.classFileCoeffPath + \
+                    "/" + actuatorClassFile
+                classXmlCoeffFile = xmlParser.parse(classFullFilePath)
+            except IOError:
+                self.logger.warn('Class coeff file %s does not exist' % (classFullFilePath))
+                continue
+            except xmlParser.ParseError:
+                msg = 'Invalid XML in file %s' % (classFullFilePath)
+                self.logger.error(msg)
+                raise Exception(msg)
 
-                self.configDictionary[node][
-                    'firmware'] = classXmlCoeffFile.find('Processor').get('id')
-                self.configDictionary[node][
-                    'type'] = classXmlCoeffFile.find('Type').get('id')
-                self.configDictionary[node]['location'] = node
+            self.configDictionary[node][
+                'firmware'] = classXmlCoeffFile.find('Processor').get('id')
+            self.configDictionary[node][
+                'type'] = classXmlCoeffFile.find('Type').get('id')
+            self.configDictionary[node]['location'] = node
 
     def getInstanceRoot(self):
         return self.instanceFileRoot
+
+    def getForearmCoeffDictionary(self):
+        return self.forearmCoeffDictionary
 
     def getMechanisms(self):
         return self.mechanisms
@@ -299,7 +354,7 @@ class InstanceFileHandler():
                 except IOError as e:
                     self.logger.warn('Could not open xml file: {}'.format(e))
                 except xmlParser.ParseError as e:
-                    msg = 'Could not parse xml file {}: {}'.format(f,e)
+                    msg = 'Could not parse xml file {}: {}'.format(f, e)
                     self.logger.warn(msg)
             if not cfgs:
                 msg = 'No config values found!'
@@ -336,6 +391,11 @@ class InstanceFileHandler():
                 result = os.path.join(root, fname)
 
         coeffs = {}
+
+        if result == "":
+            self.logger.error('Coeff file name {} was not found, skipping! Check that the file exists!'.format(fname))
+            return coeffs
+
         xmlCoeffObject = xmlParser.parse(result)
         for coeff in xmlCoeffObject.iter('Coeff'):
             coeffName = coeff.get('id')

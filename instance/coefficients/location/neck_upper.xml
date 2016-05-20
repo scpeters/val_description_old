@@ -4,7 +4,7 @@
     <FileGenDate date="2013-10-25" time="21:34:25.477992"/>
   </Properties>
   <Coeffs>
-    <Coeff id="JointSafety_LowerLimit_Rad" value="-0.922"/>
+    <Coeff id="JointSafety_LowerLimit_Rad" value="-1"/>
     <Coeff id="JointSafety_UpperLimit_Rad" value="0.15"/>
   </Coeffs>
 </CoeffData>

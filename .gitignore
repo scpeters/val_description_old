@@ -13,3 +13,6 @@ test_bench*.xml
 .*.*.swp
 *.*.swp
 instance/instances/instance_files/*
+*.save
+*.old
+*.swo
