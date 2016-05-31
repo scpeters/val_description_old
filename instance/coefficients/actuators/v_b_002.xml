@@ -13,10 +13,10 @@
         <Coeff id="JointSensors_MotorPosition" value="1.0" />
         <Coeff id="JointSensors_OutputForce" value="2.0" />
         <Coeff id="JointSensors_OutputPosition" value="2.0" />
-        <Coeff id="JointSensors_OutputVelocity" value="1.0" />
+        <Coeff id="JointSensors_OutputVelocity" value="4.0" />
         <Coeff id="PositionOffset_Rad" value="2.11612731142" />
         <Coeff id="SpringAPS_BitOffset" value="94921038.0" />
         <Coeff id="SpringAPS_MountingGain" value="-1.0" />
-        <Coeff id="TorqueOffset_Nm" value="4.35932483915" />
+        <Coeff id="TorqueOffset_Nm" value="4.23151552397" />
     </Coeffs>
 </CoeffData>
