@@ -4,7 +4,6 @@
     <LocationFile id="knee_pitch.xml" />
   <SensorsFile id="sensors.xml" />
   <SafetyFile id="safety.xml" />
-  <ModeFile id="mode.xml" />
   <Coeffs>
     <Coeff description="Kinematic direction of joint" id="JointKinematicDir" value="-1.0" />
     <Coeff description="Angle offset used for calibrating joint angle" id="PositionOffset_Rad" value="-2.38951036924" />
