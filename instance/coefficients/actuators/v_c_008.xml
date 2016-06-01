@@ -4,7 +4,6 @@
     <LocationFile id="hip_pitch.xml" />
   <SensorsFile id="sensors.xml" />
   <SafetyFile id="safety.xml" />
-  <ModeFile id="mode.xml" />
   <Coeffs>
     <Coeff description="Kinematic direction of joint" id="JointKinematicDir" value="1" />
     <Coeff description="Incremental Encoder" id="JointSensors_MotorPosition" value="1" />

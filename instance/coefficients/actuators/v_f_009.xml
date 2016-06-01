@@ -4,7 +4,6 @@
     <LocationFile id="shoulder_yaw.xml" />
     <SensorsFile id="sensors.xml" />
     <SafetyFile id="safety.xml" />
-    <ModeFile id="mode.xml" />
     <Coeffs>
         <Coeff description="" id="EncMountingDir" value="-1" />
         <Coeff description="" id="EncoderIndexOffset" value="4.892" />

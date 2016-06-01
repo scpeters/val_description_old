@@ -4,7 +4,6 @@
     <LocationFile id="elbow_pitch_left.xml" />
     <SensorsFile id="sensors.xml" />
     <SafetyFile id="safety.xml" />
-    <ModeFile id="mode.xml" />
     <Coeffs>
         <Coeff description="" id="JointKinematicDir" value="-1.0" />
         <Coeff description="" id="TorqueOffset_Nm" value="-3.26298018365" />

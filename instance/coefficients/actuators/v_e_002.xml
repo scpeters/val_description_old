@@ -4,7 +4,6 @@
     <LocationFile id="ankle.xml"/>
     <SensorsFile id="sensors.xml"/>
     <SafetyFile id="safety.xml"/>
-    <ModeFile id="mode.xml"/>
     <Coeffs>
         <Coeff id="EncMountingDir" value="1.0"/>
         <Coeff id="EncoderIndexOffset" value="1.42756200637"/>

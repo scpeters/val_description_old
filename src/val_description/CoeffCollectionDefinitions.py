@@ -237,17 +237,6 @@ AllowedClassFiles = {"a": "a.xml",
                      "h_athena2": None
                      }
 
-AllowedModeFiles = {"a": "mode.xml",
-                    "b": "mode.xml",
-                    "c": "mode.xml",
-                    "d": "mode.xml",
-                    "e": "mode.xml",
-                    "f": "mode.xml",
-                    "g": "mode.xml",
-                    "h_athena1": None,
-                    "h_athena2": None
-                    }
-
 AllowedSensorFiles = {"a": "sensors.xml",
                       "b": "sensors.xml",
                       "c": "sensors.xml",
@@ -292,8 +281,6 @@ ControllerNeededCoeffs = {"a": ["Commutation_Select", "TorqueControl_MotorTorque
                           "h_athena2": [None]
                           }
 
-
-ModesNeededCoeffs = []
 
 LocationNeededCoeffs = {"a": ["JointSafety_LowerLimit_Rad",
                               "JointSafety_UpperLimit_Rad"],
