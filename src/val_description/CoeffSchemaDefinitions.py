@@ -155,6 +155,7 @@ controller_coeffs_definition = \
     <xs:enumeration value="PositionControl_Kd"/>
     <xs:enumeration value="PositionControl_Kp"/>
     <xs:enumeration value="PositionControl_SensorFeedback"/>
+    <xs:enumeration value="PositionControl_MotorTorqueDirection"/>
     <xs:enumeration value="SpaceVector_CurrentToSV"/>
     <xs:enumeration value="SpaceVector_MaxNormVoltage"/>
     <xs:enumeration value="TorqueControl_Current2MotorTorque"/>
