@@ -7,7 +7,7 @@
     <ModeFile id="mode.xml" />
     <Coeffs>
         <Coeff id="EncMountingDir" value="1.0" />
-        <Coeff id="EncoderIndexOffset" value="1.86" />
+        <Coeff id="EncoderIndexOffset" value="2.08" />
         <Coeff id="JointKinematicDir" value="1.0" />
         <Coeff id="JointOutputAPS_MountingGain" value="1.0" />
         <Coeff id="JointSensors_MotorPosition" value="1.0" />
