@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<robot name="valkyrie_firmware_locations" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="ProcFirmwareBaseURL" value="http://flexo.jsc.nasa.gov/bamboo/browse/DRCE-TURBOPROC/latest/artifact/shared/"/>
+    <xacro:property name="FPGAFirmwareBaseURL" value="NA"/>
+    <xacro:property name="TurboProcRotaryFirmwareExtension" value="Rotary-Binary-for-Bootloader/turbo_bootloader.bin"/>
+    <xacro:property name="TurboProcLinearFirmwareExtension" value="Linear-Binary-for-Bootloader/turbo_bootloader.bin"/>
+    <xacro:property name="TurboProcRotaryFirmwareURL" value="${TurboProcRotaryFirmwareExtension}"/>
+    <xacro:property name="TurboProcLinearFirmwareURL" value="${TurboProcLinearFirmwareExtension}"/>
+    <xacro:property name="TurboFPGAFirmwareURL" value="NA"/>
+
+    <xacro:macro name="firmware_base_url" >
+        <TurbodriverProcessorFirmware>
+            <ProcFirmwareBaseURL id="${ProcFirmwareBaseURL}"/>
+        </TurbodriverProcessorFirmware>
+        <TurbodriverFPGAFirmware>
+            <FPGAFirmwareBaseURL id="${FPGAFirmwareBaseURL}"/>
+        </TurbodriverFPGAFirmware>
+    </xacro:macro>
+</robot>

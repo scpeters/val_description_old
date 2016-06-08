@@ -4,11 +4,11 @@
     <xacro:include filename="$(find val_description)/common/xacro/joint_names/valkyrie_joint_names.xacro"/>
 
     <xacro:macro name="neck" params="j1_serial_number j2_serial_number j3_serial_number" >
-    	<xacro:simple_mechanism name="${LowerNeckPitchJointName}" serial_number="${j1_serial_number}" node="${LowerNeckPitchNode}"/>
+    	<xacro:simple_mechanism name="${LowerNeckPitchJointName}" serial_number="${j1_serial_number}" node="${LowerNeckPitchNode}" processor_firmware="" fpga_firmware=""/>
 
-    	<xacro:simple_mechanism name="${NeckYawJointName}" serial_number="${j2_serial_number}" node="${NeckYawNode}"/>
+    	<xacro:simple_mechanism name="${NeckYawJointName}" serial_number="${j2_serial_number}" node="${NeckYawNode}" processor_firmware="" fpga_firmware=""/>
 
-    	<xacro:simple_mechanism name="${UpperNeckPitchJointName}" serial_number="${j3_serial_number}" node="${UpperNeckPitchNode}"/>
+    	<xacro:simple_mechanism name="${UpperNeckPitchJointName}" serial_number="${j3_serial_number}" node="${UpperNeckPitchNode}" processor_firmware="" fpga_firmware=""/>
     </xacro:macro>
 
 </robot>
