@@ -24,12 +24,12 @@
 	</Actuator>
 </xacro:macro>
 
-<xacro:macro name="two_active_joint_mechanism" params="mechanism_name actuator0_name actuator1_name joint0_name joint1_name actuator0_serial actuator0_node actuator1_serial actuator1_node processor_firmware0 fpga_firmware0" >
+<xacro:macro name="two_active_joint_mechanism" params="mechanism_name actuator0_name actuator1_name joint0_name joint1_name actuator0_serial actuator0_node actuator1_serial actuator1_node processor_firmware0 fpga_firmware0 processor_firmware1 fpga_firmware1" >
 	<Mechanism id="${mechanism_name}" type="complex">
 		<xacro:joint name="${joint0_name}" type="active"/>
 		<xacro:joint name="${joint1_name}" type="active"/>
 		<xacro:actuator name="${actuator0_name}" serial_number="${actuator0_serial}" node="${actuator0_node}" processor_firmware="${processor_firmware0}" fpga_firmware="${fpga_firmware0}"/>
-		<xacro:actuator name="${actuator1_name}" serial_number="${actuator1_serial}" node="${actuator1_node}" processor_firmware="${processor_firmware0}" fpga_firmware="${fpga_firmware0}"/>
+		<xacro:actuator name="${actuator1_name}" serial_number="${actuator1_serial}" node="${actuator1_node}" processor_firmware="${processor_firmware1}" fpga_firmware="${fpga_firmware1}"/>
 	</Mechanism>
 </xacro:macro>
 
