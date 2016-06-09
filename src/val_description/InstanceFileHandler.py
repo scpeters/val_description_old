@@ -4,6 +4,7 @@ import rospkg
 import logging
 from nasa_val_embedded_utils import cfgNode
 import threading
+import urllib2
 
 
 class InstanceFileHandler():
@@ -60,7 +61,8 @@ class InstanceFileHandler():
             self.channels.append(channel)
 
         turboProcFirmwareRoot = self.instanceFileRoot.find('TurbodriverProcessorFirmware')
-        self.turboProcSources = {'firmware': {'type':'url', 'location':turboProcFirmwareRoot.find('ProcFirmwareBaseURL').get('id')}}
+        self.turboPublicProcSources = {'firmware': {'type':'url', 'location':turboProcFirmwareRoot.find('PublicProcFirmwareBaseURL').get('id')}}
+        self.turboPrivateProcSources = {'firmware': {'type':'url', 'location':turboProcFirmwareRoot.find('PrivateProcFirmwareBaseURL').get('id')}}
 
         try:
             devicesRoot = self.instanceFileRoot.find('Devices')
@@ -427,8 +429,9 @@ class InstanceFileHandler():
         if nodeName not in self.getNodeNames():
             raise Exception('Node {} not specified in config source'.format(nodeName))
         elif nodeName not in self.cfgnodes:
-            self.cfgnodes[nodeName] = cfgNode.cfgNode(self.turboProcSources,self.firmware[nodeName],
+            self.cfgnodes[nodeName] = cfgNode.cfgNode(self.turboPublicProcSources,self.firmware[nodeName],
                                               self.dlcache,self.logger)
+
     def getConfig(self,nodeName):
         if nodeName not in self.cfgnodes: self.initNode(nodeName)
         with self.dlcache_l:
@@ -443,5 +446,10 @@ class InstanceFileHandler():
     def getFirmware(self,nodeName,dest):
         if nodeName not in self.cfgnodes: self.initNode(nodeName)
         with self.dlcache_l:
-            fw = self.cfgnodes[nodeName].getFw(dest)
+            try:
+                fw = self.cfgnodes[nodeName].getFw(dest)
+            except urllib2.URLError:
+                self.cfgnodes[nodeName].sources = self.turboPrivateProcSources
+                fw = self.cfgnodes[nodeName].getFw(dest)
+                print "url is not valid"
         return fw
