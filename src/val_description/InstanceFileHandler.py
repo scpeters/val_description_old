@@ -459,7 +459,7 @@ class InstanceFileHandler():
             try:
                 fw = self.cfgnodes[nodeName].getFw(dest)
             except urllib2.URLError:
+                # url is not valid - switch to our second url
                 self.cfgnodes[nodeName].sources = self.turboPrivateProcSources
                 fw = self.cfgnodes[nodeName].getFw(dest)
-                print "url is not valid"
         return fw
