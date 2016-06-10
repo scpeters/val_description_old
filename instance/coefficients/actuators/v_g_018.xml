@@ -4,7 +4,6 @@
     <LocationFile id="forearm_yaw.xml" />
     <SensorsFile id="sensors_leonidas.xml" />
     <SafetyFile id="safety.xml" />
-    <ModeFile id="mode.xml" />
     <Coeffs>
         <Coeff id="EncMountingDir" value="-1" />
         <Coeff id="EncoderIndexOffset" value="0.47" />

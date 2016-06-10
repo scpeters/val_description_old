@@ -26,5 +26,6 @@
     <Coeff description="" value="400.0" id="PositionControl_Kp"/>
     <Coeff description="" value="0.0" id="PositionControl_Kd"/>
     <Coeff description="2 - HarmAPS, 3 - JointAPS" value="4" id="PositionControl_SensorFeedback"/>
+    <Coeff id="PositionControl_MotorTorqueDirection" value="1.0"/>
   </Coeffs>
 </CoeffData>

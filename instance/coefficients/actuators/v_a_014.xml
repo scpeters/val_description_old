@@ -4,7 +4,6 @@
     <LocationFile id="hip_yaw_right.xml" />
     <SensorsFile id="sensors.xml" />
     <SafetyFile id="safety.xml" />
-    <ModeFile id="mode.xml" />
     <Coeffs>
         <Coeff description="" id="JointKinematicDir" value="-1.0" />
         <Coeff description="" id="PositionOffset_Rad" value="-0.590582547545" />

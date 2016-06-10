@@ -1,10 +1,9 @@
 <CoeffData>
-    <ClassFile id="b.xml" />
-    <ControllerFile id="b_sv.xml" />
-    <LocationFile id="hip_roll_left.xml" />
-    <SensorsFile id="sensors.xml" />
-    <SafetyFile id="safety.xml" />
-    <ModeFile id="mode.xml" />
+    <ClassFile id="b.xml"/>
+    <ControllerFile id="b_sv.xml"/>
+    <LocationFile id="hip_roll_left.xml"/>
+    <SensorsFile id="sensors.xml"/>
+    <SafetyFile id="safety.xml"/>
     <Coeffs>
         <Coeff id="EncMountingDir" value="-1.0" />
         <Coeff id="EncoderIndexOffset" value="5.66" />

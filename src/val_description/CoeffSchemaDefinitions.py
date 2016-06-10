@@ -155,6 +155,7 @@ controller_coeffs_definition = \
     <xs:enumeration value="PositionControl_Kd"/>
     <xs:enumeration value="PositionControl_Kp"/>
     <xs:enumeration value="PositionControl_SensorFeedback"/>
+    <xs:enumeration value="PositionControl_MotorTorqueDirection"/>
     <xs:enumeration value="SpaceVector_CurrentToSV"/>
     <xs:enumeration value="SpaceVector_MaxNormVoltage"/>
     <xs:enumeration value="TorqueControl_Current2MotorTorque"/>
@@ -211,15 +212,6 @@ location_coeffs_definition = \
 </xs:simpleType>
 '''
 
-modes_coeffs_definition = \
-    '''
-<xs:simpleType name="ValidCoeffs">
-  <xs:restriction base="xs:string">
-    <xs:enumeration value="Commutation_Select"/>
-  </xs:restriction>
-</xs:simpleType>
-'''
-
 location_files_definition = \
     '''
   <xs:simpleType name="ValidLocations">
@@ -253,15 +245,6 @@ sensor_files_definition = \
     <xs:restriction base="xs:string">
       <xs:enumeration value="sensors.xml"/>
       <xs:enumeration value="sensors_leonidas.xml"/>
-    </xs:restriction>
-  </xs:simpleType>
-'''
-
-mode_file_definitions = \
-    '''
-  <xs:simpleType name="ValidModeFiles">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="mode.xml"/>
     </xs:restriction>
   </xs:simpleType>
 '''
@@ -367,11 +350,6 @@ actuator_coeff_files_definition = \
 <xs:element name="SafetyFile">
       <xs:complexType>
             <xs:attribute name="id" type="ValidSafetyFiles"></xs:attribute>
-      </xs:complexType>
-</xs:element>
-<xs:element name="ModeFile">
-      <xs:complexType>
-            <xs:attribute name="id" type="ValidModeFiles"></xs:attribute>
       </xs:complexType>
 </xs:element>
 '''

@@ -237,17 +237,6 @@ AllowedClassFiles = {"a": "a.xml",
                      "h_athena2": None
                      }
 
-AllowedModeFiles = {"a": "mode.xml",
-                    "b": "mode.xml",
-                    "c": "mode.xml",
-                    "d": "mode.xml",
-                    "e": "mode.xml",
-                    "f": "mode.xml",
-                    "g": "mode.xml",
-                    "h_athena1": None,
-                    "h_athena2": None
-                    }
-
 AllowedSensorFiles = {"a": "sensors.xml",
                       "b": "sensors.xml",
                       "c": "sensors.xml",
@@ -287,13 +276,11 @@ ControllerNeededCoeffs = {"a": ["Commutation_Select", "TorqueControl_MotorTorque
                           "d": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
                           "e": ["Commutation_Select", "ForceControl_Current2MotorForce", "ForceControl_SensorFeedback", "ForceControl_MotorForceDirection"],
                           "f": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
-                          "g": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque"],
+                          "g": ["Commutation_Select", "TorqueControl_MotorTorqueDirection", "TorqueControl_Current2MotorTorque", "PositionControl_MotorTorqueDirection"],
                           "h_athena1": [None],
                           "h_athena2": [None]
                           }
 
-
-ModesNeededCoeffs = []
 
 LocationNeededCoeffs = {"a": ["JointSafety_LowerLimit_Rad",
                               "JointSafety_UpperLimit_Rad"],
