@@ -1,25 +1,29 @@
 <CoeffData>
-    <ClassFile id="e.xml"/>
-    <ControllerFile id="e_futek_dh.xml"/>
-    <LocationFile id="ankle.xml"/>
-    <SensorsFile id="sensors.xml"/>
-    <SafetyFile id="safety.xml"/>
+    <ClassFile id="e.xml">
+        <SubClassFile id="ankle_linear.xml" />
+    </ClassFile>
+    <ControllerFile id="e_dh.xml">
+        <SubControllerFile id="e_futek_dh.xml" />
+    </ControllerFile>
+    <LocationFile id="ankle.xml" />
+    <SensorsFile id="sensors.xml" />
+    <SafetyFile id="safety.xml" />
     <Coeffs>
-        <Coeff id="EncMountingDir" value="1.0"/>
-        <Coeff id="EncoderIndexOffset" value="1.093556267"/>
-        <Coeff id="ForceOffset_N" value="-65.715"/>
-        <Coeff id="JointKinematicDir" value="-1.0"/>
-        <Coeff id="JointOutputAPS_MountingGain" value="-1.0"/>
-        <Coeff id="JointSensors_LinearPosition" value="2.0"/>
-        <Coeff id="JointSensors_LinearVelocity" value="2.0"/>
-        <Coeff id="JointSensors_MotorPosition" value="1.0"/>
-        <Coeff id="JointSensors_OutputForce" value="2.0"/>
-        <Coeff id="JointSensors_OutputPosition" value="3.0"/>
-        <Coeff id="JointSensors_OutputVelocity" value="1.0"/>
-        <Coeff id="LoadCell_MountingGain" value="1.0"/>
-        <Coeff id="LoadCell_OffsetBits" value="33063.0"/>
-        <Coeff id="PositionOffset_Rad" value="2.1483"/>
-        <Coeff id="SpringAPS_BitOffset" value="4614240.0"/>
-        <Coeff id="SpringAPS_MountingGain" value="-1.0"/>
+        <Coeff id="EncMountingDir" value="1.0" />
+        <Coeff id="EncoderIndexOffset" value="1.093556267" />
+        <Coeff id="ForceOffset_N" value="-10.8092508316" />
+        <Coeff id="JointKinematicDir" value="-1.0" />
+        <Coeff id="JointOutputAPS_MountingGain" value="1.0" />
+        <Coeff id="JointSensors_LinearPosition" value="2.0" />
+        <Coeff id="JointSensors_LinearVelocity" value="2.0" />
+        <Coeff id="JointSensors_MotorPosition" value="1.0" />
+        <Coeff id="JointSensors_OutputForce" value="2.0" />
+        <Coeff id="JointSensors_OutputPosition" value="3.0" />
+        <Coeff id="JointSensors_OutputVelocity" value="1.0" />
+        <Coeff id="LoadCell_MountingGain" value="1.0" />
+        <Coeff id="LoadCell_OffsetBits" value="32940.0" />
+        <Coeff id="PositionOffset_Rad" value="0.0176404197693" />
+        <Coeff id="SpringAPS_BitOffset" value="4893220.0" />
+        <Coeff id="SpringAPS_MountingGain" value="-1.0" />
     </Coeffs>
 </CoeffData>
