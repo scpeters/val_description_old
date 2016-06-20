@@ -5,18 +5,17 @@
     <SensorsFile id="sensors.xml"/>
     <SafetyFile id="safety.xml"/>
     <Coeffs>
-        <Coeff id="EncMountingDir" value="-1.0"/>
-        <Coeff id="EncoderIndexOffset" value="5.66"/>
-        <Coeff id="JointKinematicDir" value="1.0"/>
-        <Coeff id="JointOutputAPS_MountingGain" value="1.0"/>
-        <Coeff id="JointSafety_LimitZone_Rad" value="0.02"/>
-        <Coeff id="JointSensors_MotorPosition" value="1.0"/>
-        <Coeff id="JointSensors_OutputForce" value="2.0"/>
-        <Coeff id="JointSensors_OutputPosition" value="2.0"/>
-        <Coeff id="JointSensors_OutputVelocity" value="1.0"/>
-        <Coeff id="PositionOffset_Rad" value="2.1153"/>
-        <Coeff id="SpringAPS_BitOffset" value="94921038.0"/>
-        <Coeff id="SpringAPS_MountingGain" value="-1.0"/>
-        <Coeff id="TorqueOffset_Nm" value="0.834"/>
+        <Coeff id="EncMountingDir" value="-1.0" />
+        <Coeff id="EncoderIndexOffset" value="5.66" />
+        <Coeff id="JointKinematicDir" value="-1.0" />
+        <Coeff id="JointOutputAPS_MountingGain" value="1.0" />
+        <Coeff id="JointSensors_MotorPosition" value="1.0" />
+        <Coeff id="JointSensors_OutputForce" value="2.0" />
+        <Coeff id="JointSensors_OutputPosition" value="2.0" />
+        <Coeff id="JointSensors_OutputVelocity" value="4.0" />
+        <Coeff id="PositionOffset_Rad" value="2.11612731142" />
+        <Coeff id="SpringAPS_BitOffset" value="94921038.0" />
+        <Coeff id="SpringAPS_MountingGain" value="-1.0" />
+        <Coeff id="TorqueOffset_Nm" value="3.81371245236" />
     </Coeffs>
 </CoeffData>
