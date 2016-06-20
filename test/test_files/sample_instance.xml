@@ -13,40 +13,56 @@
     <Channel id="/neck"/>
     <Channel id="/trunk"/>
   </Channels>
+  <TurbodriverProcessorFirmware>
+    <PublicProcFirmwareBaseURL id="http://linkthatdoesnotresolve.com"/>
+    <PrivateProcFirmwareBaseURL id="http://flexo.jsc.nasa.gov/bamboo/browse/DRCE-TURBOPROC/latest/artifact/shared/"/>
+  </TurbodriverProcessorFirmware>
+  <TurbodriverFPGAFirmware>
+    <PublicFPGAFirmwareBaseURL id="NA"/>
+    <PrivateFPGAFirmwareBaseURL id="NA"/>
+  </TurbodriverFPGAFirmware>
   <Mechanisms>
     <Mechanism id="left_hip_yaw" type="simple">
       <SerialNumber id="test_v_a_001"/>
       <Node id="/left_leg/j1"/>
       <CalibrationFile id="valkyrie_A_left_hip_yaw_cal.xml"/>
+      <Processor_Firmware id="Rotary-Binary-for-Bootloader/turbo_bootloader.bin"/>
+      <Fpga_Firmware id=""/>
     </Mechanism>
-    <Mechanism id="left_ankle" type="complex">
-      <Joint id="pitch" type="active">
-        <CalibrationFile id="valkyrie_A_left_ankle_pitch_cal.xml"/>
-      </Joint>
-      <Joint id="roll" type="active">
-        <CalibrationFile id="valkyrie_A_left_ankle_roll_cal.xml"/>
-      </Joint>
-      <Actuator id="left_ankle_actuator0">
+    <Mechanism id="leftAnkle" type="complex">
+      <Joint id="leftAnklePitch" type="active">
+    </Joint>
+      <Joint id="leftAnkleRoll" type="active">
+    </Joint>
+      <Actuator id="leftAnkleLeftActuator">
         <SerialNumber id="test_v_e_001"/>
         <Node id="/left_leg/ankle/actuator0"/>
+        <Processor_Firmware id="Linear-Binary-for-Bootloader/turbo_bootloader.bin"/>
+        <Fpga_Firmware id=""/>
       </Actuator>
-      <Actuator id="left_ankle_actuator1">
+      <Actuator id="leftAnkleRightActuator">
         <SerialNumber id="test_v_e_002"/>
         <Node id="/left_leg/ankle/actuator1"/>
+        <Processor_Firmware id="Linear-Binary-for-Bootloader/turbo_bootloader.bin"/>
+        <Fpga_Firmware id=""/>
       </Actuator>
     </Mechanism>
     <Mechanism id="waist" type="complex">
-      <Joint id="pitch" type="active">
-      </Joint>
-      <Joint id="roll" type="active">
-      </Joint>
-      <Actuator id="waist_left_actuator">
+      <Joint id="torsoPitch" type="active">
+    </Joint>
+      <Joint id="torsoRoll" type="active">
+    </Joint>
+      <Actuator id="waistLeftActuator">
         <SerialNumber id="test_v_e_003"/>
         <Node id="/trunk/left_actuator"/>
+        <Processor_Firmware id="Linear-Binary-for-Bootloader/turbo_bootloader.bin"/>
+        <Fpga_Firmware id=""/>
       </Actuator>
-      <Actuator id="left_ankle_actuator1">
+      <Actuator id="waistRightActuator">
         <SerialNumber id="test_v_e_004"/>
         <Node id="/trunk/right_actuator"/>
+        <Processor_Firmware id="Linear-Binary-for-Bootloader/turbo_bootloader.bin"/>
+        <Fpga_Firmware id=""/>
       </Actuator>
     </Mechanism>
   </Mechanisms>

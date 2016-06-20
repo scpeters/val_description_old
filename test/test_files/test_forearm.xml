@@ -8,6 +8,14 @@
 <Channels>
   <Channel id="/forearm"/>
 </Channels>
+  <TurbodriverProcessorFirmware>
+    <PublicProcFirmwareBaseURL id="http://linkthatdoesnotresolve.com"/>
+    <PrivateProcFirmwareBaseURL id="http://flexo.jsc.nasa.gov/bamboo/browse/DRCE-TURBOPROC/latest/artifact/shared/"/>
+  </TurbodriverProcessorFirmware>
+  <TurbodriverFPGAFirmware>
+    <PublicFPGAFirmwareBaseURL id="NA"/>
+    <PrivateFPGAFirmwareBaseURL id="NA"/>
+  </TurbodriverFPGAFirmware>
 <Mechanisms>
   <Mechanism id="rightForearm" type="forearm">
     <SerialNumber id="test_v_h_001"/>
