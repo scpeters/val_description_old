@@ -12,7 +12,7 @@
     </Channels>
 
     <Mechanisms>
-    <xacro:simple_mechanism name="testbench_actuator" serial_number="${forearm_yaw_serial_number}" node="${testbench_node}"/>
+    <xacro:simple_mechanism name="testbench_actuator" serial_number="${forearm_yaw_serial_number}" node="${testbench_node}" processor_firmware="" fpga_firmware=""/>
     <xacro:forearm mechanism_name="${prefix}Forearm" serial_number="${forearm_serial_number}" athena1_node="${Athena1Node}" athena2_node="${Athena2Node}" />
 	</Mechanisms>
 

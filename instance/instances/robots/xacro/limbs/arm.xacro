@@ -2,17 +2,18 @@
 
     <xacro:include filename="$(find val_description)/instance/instances/robots/xacro/mechanisms/mechanisms.xacro"/>
     <xacro:include filename="$(find val_description)/common/xacro/joint_names/valkyrie_joint_names.xacro"/>
+    <xacro:include filename="$(find val_description)/common/xacro/firmware/valkyrie_firmware.xacro"/>
 
     <xacro:macro name="arm" params="prefix j1_serial_number j2_serial_number j3_serial_number j4_serial_number j5_serial_number forearm_serial_number" >
-    	<xacro:simple_mechanism name="${ShoulderPitchJointName}" serial_number="${j1_serial_number}" node="${ShoulderPitchNode}"/>
+    	<xacro:simple_mechanism name="${ShoulderPitchJointName}" serial_number="${j1_serial_number}" node="${ShoulderPitchNode}" processor_firmware="${ShoulderPitchProcFirmware}" fpga_firmware="${ShoulderPitchFPGAFirmware}"/>
 
-    	<xacro:simple_mechanism name="${ShoulderRollJointName}" serial_number="${j2_serial_number}" node="${ShoulderRollNode}"/>
+    	<xacro:simple_mechanism name="${ShoulderRollJointName}" serial_number="${j2_serial_number}" node="${ShoulderRollNode}" processor_firmware="${ShoulderRollProcFirmware}" fpga_firmware="${ShoulderRollFPGAFirmware}"/>
 
-    	<xacro:simple_mechanism name="${ShoulderYawJointName}" serial_number="${j3_serial_number}" node="${ShoulderYawNode}"/>
+    	<xacro:simple_mechanism name="${ShoulderYawJointName}" serial_number="${j3_serial_number}" node="${ShoulderYawNode}" processor_firmware="${ShoulderYawProcFirmware}" fpga_firmware="${ShoulderYawFPGAFirmware}"/>
 
-    	<xacro:simple_mechanism name="${ElbowPitchJointName}" serial_number="${j4_serial_number}" node="${ElbowPitchNode}"/>
+    	<xacro:simple_mechanism name="${ElbowPitchJointName}" serial_number="${j4_serial_number}" node="${ElbowPitchNode}" processor_firmware="${ElbowPitchProcFirmware}" fpga_firmware="${ElbowPitchFPGAFirmware}"/>
 
-    	<xacro:simple_mechanism name="${ForearmYawJointName}" serial_number="${j5_serial_number}" node="${ForearmYawNode}"/>
+    	<xacro:simple_mechanism name="${ForearmYawJointName}" serial_number="${j5_serial_number}" node="${ForearmYawNode}" processor_firmware="${ForearmYawProcFirmware}" fpga_firmware="${ForearmYawFPGAFirmware}"/>
 
         <xacro:forearm mechanism_name="${prefix}Forearm" serial_number="${forearm_serial_number}" athena1_node="${Athena1Node}" athena2_node="${Athena2Node}" />
     </xacro:macro>
