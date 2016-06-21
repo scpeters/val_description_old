@@ -18,9 +18,9 @@ class InstanceFileHandler():
         self.robotChildren = []
 
         # needed for fwLoader
-        self.cfgnodes= {} # a dict of node info objects with locations as keys
-        self.dlcache = {} # dict of downloaded files and their locations 
-        self.dlcache_l = threading.Lock() # protect dlcache in case we are threaded
+        self.cfgnodes = {}  # a dict of node info objects with locations as keys
+        self.dlcache = {}  # dict of downloaded files and their locations
+        self.dlcache_l = threading.Lock()  # protect dlcache in case we are threaded
 
         self.turboProcSources = {}
         self.firmware = {}
@@ -62,8 +62,8 @@ class InstanceFileHandler():
             self.channels.append(channel)
 
         turboProcFirmwareRoot = self.instanceFileRoot.find('TurbodriverProcessorFirmware')
-        self.turboPublicProcSources = {'firmware': {'type':'url', 'location':turboProcFirmwareRoot.find('PublicProcFirmwareBaseURL').get('id')}}
-        self.turboPrivateProcSources = {'firmware': {'type':'url', 'location':turboProcFirmwareRoot.find('PrivateProcFirmwareBaseURL').get('id')}}
+        self.turboPublicProcSources = {'firmware': {'type': 'url', 'location': turboProcFirmwareRoot.find('PublicProcFirmwareBaseURL').get('id')}}
+        self.turboPrivateProcSources = {'firmware': {'type': 'url', 'location': turboProcFirmwareRoot.find('PrivateProcFirmwareBaseURL').get('id')}}
 
         try:
             devicesRoot = self.instanceFileRoot.find('Devices')
@@ -80,13 +80,13 @@ class InstanceFileHandler():
                 serialNumber = mechanism.find('SerialNumber').get('id')
                 node = mechanism.find('Node').get('id')
                 self.serialNumbers.append(serialNumber)
-                self.firmware[node] = {'firmware': {'processor':mechanism.find('Processor_Firmware').get('id')}}
+                self.firmware[node] = {'firmware': {'processor': mechanism.find('Processor_Firmware').get('id')}}
             elif mechanism.get('type') == 'complex':
                 for actuator in mechanism.findall('Actuator'):
                     serialNumber = actuator.find('SerialNumber').get('id')
                     node = actuator.find('Node').get('id')
                     self.serialNumbers.append(serialNumber)
-                    self.firmware[node] = {'firmware': {'processor':actuator.find('Processor_Firmware').get('id')}}
+                    self.firmware[node] = {'firmware': {'processor': actuator.find('Processor_Firmware').get('id')}}
             elif mechanism.get('type') == 'forearm':
                 serialNumber = mechanism.find('SerialNumber').get('id')
                 self.serialNumbers.append(serialNumber)
@@ -191,7 +191,7 @@ class InstanceFileHandler():
                 except AttributeError:
                     actuatorSubClassFile = None
                     # Coeffs are not required to specify a subclass
-                    
+
             except AttributeError:
                 msg = 'ClassFile tag does not exist or is misspelled in actuator coeff file!'
                 self.logger.error(msg)
@@ -439,22 +439,25 @@ class InstanceFileHandler():
         if nodeName not in self.getNodeNames():
             raise Exception('Node {} not specified in config source'.format(nodeName))
         elif nodeName not in self.cfgnodes:
-            self.cfgnodes[nodeName] = cfgNode.cfgNode(self.turboPublicProcSources,self.firmware[nodeName],
-                                              self.dlcache,self.logger)
+            self.cfgnodes[nodeName] = cfgNode.cfgNode(self.turboPublicProcSources, self.firmware[nodeName],
+                                                      self.dlcache, self.logger)
 
-    def getConfig(self,nodeName):
-        if nodeName not in self.cfgnodes: self.initNode(nodeName)
+    def getConfig(self, nodeName):
+        if nodeName not in self.cfgnodes:
+            self.initNode(nodeName)
         with self.dlcache_l:
             cfg = self.cfgnodes[nodeName].getConfig()
         return cfg
 
     def getConfigNode(self, nodeName):
-        if nodeName not in self.cfgnodes: self.initNode(nodeName)
+        if nodeName not in self.cfgnodes:
+            self.initNode(nodeName)
         with self.dlcache_l:
             return self.cfgnodes[nodeName]
 
-    def getFirmware(self,nodeName,dest):
-        if nodeName not in self.cfgnodes: self.initNode(nodeName)
+    def getFirmware(self, nodeName, dest):
+        if nodeName not in self.cfgnodes:
+            self.initNode(nodeName)
         with self.dlcache_l:
             try:
                 fw = self.cfgnodes[nodeName].getFw(dest)
