@@ -2,6 +2,9 @@ import os
 import xml.etree.ElementTree as xmlParser
 import rospkg
 import logging
+from nasa_val_embedded_utils import cfgNode
+import threading
+import urllib2
 
 
 class InstanceFileHandler():
@@ -13,6 +16,15 @@ class InstanceFileHandler():
         self.instanceFile = xmlParser.parse(instanceXmlFile)
         self.instanceFileRoot = self.instanceFile.getroot()
         self.robotChildren = []
+
+        # needed for fwLoader
+        self.cfgnodes = {}  # a dict of node info objects with locations as keys
+        self.dlcache = {}  # dict of downloaded files and their locations
+        self.dlcache_l = threading.Lock()  # protect dlcache in case we are threaded
+
+        self.turboProcSources = {}
+        self.firmware = {}
+
         for child in self.instanceFileRoot:
             self.robotChildren.append(child)
 
@@ -48,6 +60,10 @@ class InstanceFileHandler():
         for channel in channelsRoot.findall('Channel'):
             self.channels.append(channel)
 
+        turboProcFirmwareRoot = self.instanceFileRoot.find('TurbodriverProcessorFirmware')
+        self.turboPublicProcSources = {'firmware': {'type': 'url', 'location': turboProcFirmwareRoot.find('PublicProcFirmwareBaseURL').get('id')}}
+        self.turboPrivateProcSources = {'firmware': {'type': 'url', 'location': turboProcFirmwareRoot.find('PrivateProcFirmwareBaseURL').get('id')}}
+
         try:
             devicesRoot = self.instanceFileRoot.find('Devices')
         except AttributeError as e:
@@ -59,13 +75,20 @@ class InstanceFileHandler():
             self.devices.append(device)
 
         for mechanism in self.mechanisms:
-            if mechanism.get('type') == 'simple' or mechanism.get('type') == 'forearm':
-                self.serialNumbers.append(
-                    mechanism.find('SerialNumber').get('id'))
+            if mechanism.get('type') == 'simple':
+                serialNumber = mechanism.find('SerialNumber').get('id')
+                node = mechanism.find('Node').get('id')
+                self.serialNumbers.append(serialNumber)
+                self.firmware[node] = {'firmware': {'processor': mechanism.find('Processor_Firmware').get('id')}}
             elif mechanism.get('type') == 'complex':
                 for actuator in mechanism.findall('Actuator'):
-                    self.serialNumbers.append(
-                        actuator.find('SerialNumber').get('id'))
+                    serialNumber = actuator.find('SerialNumber').get('id')
+                    node = actuator.find('Node').get('id')
+                    self.serialNumbers.append(serialNumber)
+                    self.firmware[node] = {'firmware': {'processor': actuator.find('Processor_Firmware').get('id')}}
+            elif mechanism.get('type') == 'forearm':
+                serialNumber = mechanism.find('SerialNumber').get('id')
+                self.serialNumbers.append(serialNumber)
             else:
                 msg = 'Invalid mechanism type in instance file!'
                 self.logger.error(msg)
@@ -167,7 +190,7 @@ class InstanceFileHandler():
                 except AttributeError:
                     actuatorSubClassFile = None
                     # Coeffs are not required to specify a subclass
-                    
+
             except AttributeError:
                 msg = 'ClassFile tag does not exist or is misspelled in actuator coeff file!'
                 self.logger.error(msg)
@@ -261,6 +284,9 @@ class InstanceFileHandler():
     def getNodeNames(self):
         return self.nodes
 
+    def getFirmwareArgs(self):
+        return self.firmware
+
     def getDevices(self):
         return self.devices
 
@@ -305,9 +331,6 @@ class InstanceFileHandler():
 
     def getType(self, target):
         return self.configDictionary[target]['type']
-
-    def getFirmware(self, nodeName):
-        return self.configDictionary[nodeName]['firmware']
 
     def getNodeType(self, nodeName):
         return self.configDictionary[nodeName]['type']
@@ -401,3 +424,35 @@ class InstanceFileHandler():
                     coeffs[coeffName]['disabled'] = False
 
         return coeffs
+
+    def initNode(self,nodeName):
+        if nodeName not in self.getNodeNames():
+            raise Exception('Node {} not specified in config source'.format(nodeName))
+        elif nodeName not in self.cfgnodes:
+            self.cfgnodes[nodeName] = cfgNode.cfgNode(self.turboPublicProcSources, self.firmware[nodeName],
+                                                      self.dlcache, self.logger)
+
+    def getConfig(self, nodeName):
+        if nodeName not in self.cfgnodes:
+            self.initNode(nodeName)
+        with self.dlcache_l:
+            cfg = self.cfgnodes[nodeName].getConfig()
+        return cfg
+
+    def getConfigNode(self, nodeName):
+        if nodeName not in self.cfgnodes:
+            self.initNode(nodeName)
+        with self.dlcache_l:
+            return self.cfgnodes[nodeName]
+
+    def getFirmware(self, nodeName, dest):
+        if nodeName not in self.cfgnodes:
+            self.initNode(nodeName)
+        with self.dlcache_l:
+            try:
+                fw = self.cfgnodes[nodeName].getFw(dest)
+            except urllib2.URLError:
+                # url is not valid - switch to our second url
+                self.cfgnodes[nodeName].sources = self.turboPrivateProcSources
+                fw = self.cfgnodes[nodeName].getFw(dest)
+        return fw

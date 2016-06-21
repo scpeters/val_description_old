@@ -49,17 +49,19 @@ class instanceFileHandlerTests(unittest.TestCase):
                          'leftShoulderYaw',
                          'leftElbowPitch',
                          'leftForearmYaw',
+                         'leftForearm',
                          'leftWrist',
                          'rightShoulderPitch',
                          'rightShoulderRoll',
                          'rightShoulderYaw',
                          'rightElbowPitch',
                          'rightForearmYaw',
+                         'rightForearm',
                          'rightWrist',
                          'lowerNeckPitch',
                          'neckYaw',
                          'upperNeckPitch',
-                         'torso_yaw',
+                         'torsoYaw',
                          'waist']
 
         for mechanism in mechanisms:
@@ -107,18 +109,16 @@ class instanceFileHandlerTests(unittest.TestCase):
                                 'v_f_005',
                                 'v_f_002',
                                 'v_g_005',
-                                'UNKNOWN',
-                                'UNKNOWN',
+                                'v_h_001',
+                                'v_h_002',
                                 'v_a_001',
                                 'v_b_003',
                                 'v_f_004',
                                 'v_f_003',
                                 'v_g_003',
-                                'UNKNOWN',
-                                'UNKNOWN',
                                 'v_g_006',
-                                'v_g_006',
-                                'v_g_006',
+                                'v_g_007',
+                                'v_g_008',
                                 'v_a_004',
                                 'v_e_006',
                                 'v_e_005']
@@ -147,18 +147,16 @@ class instanceFileHandlerTests(unittest.TestCase):
                              'v_f_005.xml',
                              'v_f_002.xml',
                              'v_g_005.xml',
-                             'UNKNOWN.xml',
-                             'UNKNOWN.xml',
+                             'v_h_001.xml',
+                             'v_h_002.xml',
                              'v_a_001.xml',
                              'v_b_003.xml',
                              'v_f_004.xml',
                              'v_f_003.xml',
                              'v_g_003.xml',
-                             'UNKNOWN.xml',
-                             'UNKNOWN.xml',
                              'v_g_006.xml',
-                             'v_g_006.xml',
-                             'v_g_006.xml',
+                             'v_g_007.xml',
+                             'v_g_008.xml',
                              'v_a_004.xml',
                              'v_e_006.xml',
                              'v_e_005.xml']
@@ -184,13 +182,14 @@ class instanceFileHandlerTests(unittest.TestCase):
         sampleInstanceFile = self.testDirectory + '/test_files/valkyrie_A.xml'
         instanceFileHandler = InstanceFileHandler(sampleInstanceFile)
         nodes = instanceFileHandler.getNodeNames()
-        nodesToCheck = ['/left_leg/j1',
+        nodesToCheck = ['/pelvis/waist',
+                        '/pelvis/left_leg_j1',
                         '/left_leg/j2',
                         '/left_leg/j3',
                         '/left_leg/j4',
                         '/left_leg/ankle/left_actuator',
                         '/left_leg/ankle/right_actuator',
-                        '/right_leg/j1',
+                        '/pelvis/right_leg_j1',
                         '/right_leg/j2',
                         '/right_leg/j3',
                         '/right_leg/j4',
@@ -201,6 +200,8 @@ class instanceFileHandlerTests(unittest.TestCase):
                         '/left_arm/j3',
                         '/left_arm/j4',
                         '/left_arm/j5',
+                        '/left_arm/athena1',
+                        '/left_arm/athena2',
                         '/left_arm/wrist/top_actautor',
                         '/left_arm/wrist/bottom_actuator',
                         '/right_arm/j3',
@@ -208,14 +209,17 @@ class instanceFileHandlerTests(unittest.TestCase):
                         '/right_arm/j3',
                         '/right_arm/j4',
                         '/right_arm/j5',
+                        '/right_arm/athena1',
+                        '/right_arm/athena2',
                         '/right_arm/wrist/top_actautor',
                         '/right_arm/wrist/bottom_actuator',
                         '/neck/j1',
                         '/neck/j2',
                         '/neck/j3',
-                        '/trunk/j1',
-                        '/trunk/waist/left_actuator',
-                        '/trunk/waist/right_actuator']
+                        '/trunk/left_arm_j1',
+                        '/trunk/right_arm_j1',
+                        '/trunk/left_actuator',
+                        '/trunk/right_actuator']
 
         for node in nodes:
             assert node in nodesToCheck
@@ -244,9 +248,10 @@ class instanceFileHandlerTests(unittest.TestCase):
         instanceFileHandler = InstanceFileHandler(sampleInstanceFile)
 
         expectedFirmwareType = 'rotary/turbo_bootloader.bin'
-        firmwareType = instanceFileHandler.getFirmware('/left_leg/j1')
-
-        assert firmwareType == expectedFirmwareType
+        try:
+            firmwareType = instanceFileHandler.getFirmware('/left_leg/j1', 'processor')
+        except:
+            assert False
 
     def testGetNodeType(self):
         sampleInstanceFile = self.testDirectory + \

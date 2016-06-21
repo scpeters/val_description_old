@@ -13,19 +13,31 @@
     <Channel id="/neck"/>
     <Channel id="/trunk"/>
   </Channels>
+  <TurbodriverProcessorFirmware>
+    <PublicProcFirmwareBaseURL id="http://linkthatdoesnotresolve.com"/>
+    <PrivateProcFirmwareBaseURL id="http://flexo.jsc.nasa.gov/bamboo/browse/DRCE-TURBOPROC/latest/artifact/shared/"/>
+  </TurbodriverProcessorFirmware>
+  <TurbodriverFPGAFirmware>
+    <PublicFPGAFirmwareBaseURL id="NA"/>
+    <PrivateFPGAFirmwareBaseURL id="NA"/>
+  </TurbodriverFPGAFirmware>
   <Mechanisms>
-    <Mechanism id="ankle" type="complex">
+    <Mechanism id="leftAnkle" type="complex">
       <Joint id="leftAnklePitch" type="active">
-	</Joint>
+    </Joint>
       <Joint id="leftAnkleRoll" type="active">
-	</Joint>
+    </Joint>
       <Actuator id="leftAnkleLeftActuator">
         <SerialNumber id="v_e_001"/>
         <Node id="/left_leg/ankle/left_actuator"/>
+        <Processor_Firmware id="Linear-Binary-for-Bootloader/turbo_bootloader.bin"/>
+        <Fpga_Firmware id=""/>
       </Actuator>
       <Actuator id="leftAnkleRightActuator">
         <SerialNumber id="v_e_002"/>
         <Node id="/left_leg/ankle/right_actuator"/>
+        <Processor_Firmware id="Linear-Binary-for-Bootloader/turbo_bootloader.bin"/>
+        <Fpga_Firmware id=""/>
       </Actuator>
     </Mechanism>
   </Mechanisms>
