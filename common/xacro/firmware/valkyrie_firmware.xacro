@@ -27,28 +27,28 @@
     </xacro:macro>
 
     <xacro:property name="HipYawProcFirmware" value="${TurboProcRotaryFirmwareURL}" />
-    <xacro:property name="HipYawFPGAFirmware" value="" />
+    <xacro:property name="HipYawFPGAFirmware" value="${TurboFPGAFirmwareURL}" />
     <xacro:property name="HipRollProcFirmware" value="${TurboProcRotaryFirmwareURL}" />
-    <xacro:property name="HipRollFPGAFirmware" value="" />
+    <xacro:property name="HipRollFPGAFirmware" value="${TurboFPGAFirmwareURL}" />
     <xacro:property name="HipPitchProcFirmware" value="${TurboProcRotaryFirmwareURL}" />
-    <xacro:property name="HipPitchFPGAFirmware" value="" />
+    <xacro:property name="HipPitchFPGAFirmware" value="${TurboFPGAFirmwareURL}" />
     <xacro:property name="KneePitchProcFirmware" value="${TurboProcRotaryFirmwareURL}" />
-    <xacro:property name="KneePitchFPGAFirmware" value="" />
+    <xacro:property name="KneePitchFPGAFirmware" value="${TurboFPGAFirmwareURL}" />
     <xacro:property name="AnkleLeftActuatorProcFirmware" value="${TurboProcLinearFirmwareURL}" />
-    <xacro:property name="AnkleLeftActuatorFPGAFirmware" value="" />
+    <xacro:property name="AnkleLeftActuatorFPGAFirmware" value="${TurboFPGAFirmwareURL}" />
     <xacro:property name="AnkleRightActuatorProcFirmware" value="${TurboProcLinearFirmwareURL}" />
     <xacro:property name="AnkleRightActuatorFPGAFirmware" value="" />
 
     <xacro:property name="ShoulderPitchProcFirmware" value="${TurboProcRotaryFirmwareURL}" />
-    <xacro:property name="ShoulderPitchFPGAFirmware" value="" />
+    <xacro:property name="ShoulderPitchFPGAFirmware" value="${TurboFPGAFirmwareURL}" />
     <xacro:property name="ShoulderRollProcFirmware" value="${TurboProcRotaryFirmwareURL}" />
-    <xacro:property name="ShoulderRollFPGAFirmware" value="" />
+    <xacro:property name="ShoulderRollFPGAFirmware" value="${TurboFPGAFirmwareURL}" />
     <xacro:property name="ShoulderYawProcFirmware" value="${TurboProcRotaryFirmwareURL}" />
-    <xacro:property name="ShoulderYawFPGAFirmware" value="" />
+    <xacro:property name="ShoulderYawFPGAFirmware" value="${TurboFPGAFirmwareURL}" />
     <xacro:property name="ElbowPitchProcFirmware" value="${TurboProcRotaryFirmwareURL}" />
-    <xacro:property name="ElbowPitchFPGAFirmware" value="" />
-    <xacro:property name="ForearmYawProcFirmware" value="" />
-    <xacro:property name="ForearmYawFPGAFirmware" value="" />
+    <xacro:property name="ElbowPitchFPGAFirmware" value="${TurboFPGAFirmwareURL}" />
+    <xacro:property name="ForearmYawProcFirmware" value="${TurboFPGAFirmwareURL}" />
+    <xacro:property name="ForearmYawFPGAFirmware" value="${TurboFPGAFirmwareURL}" />
 
     <xacro:property name="LowerNeckPitchProcessorFirmware" value="" />
     <xacro:property name="LowerNeckPitchFPGAFirmware" value="" />
@@ -58,11 +58,11 @@
     <xacro:property name="UpperNeckPitchFPGAFirmware" value="" />
 
     <xacro:property name="TrunkYawProcessorFirmware" value="${TurboProcRotaryFirmwareURL}" />
-    <xacro:property name="TrunkYawFPGAFirmware" value="" />
+    <xacro:property name="TrunkYawFPGAFirmware" value="${TurboFPGAFirmwareURL}" />
     <xacro:property name="WaistRightActuatorProcessorFirmware" value="${TurboProcLinearFirmwareURL}" />
-    <xacro:property name="WaistRightActuatorFPGAFirmware" value="" />
+    <xacro:property name="WaistRightActuatorFPGAFirmware" value="${TurboFPGAFirmwareURL}" />
     <xacro:property name="WaistLeftActuatorProcessorFirmware" value="${TurboProcLinearFirmwareURL}" />
-    <xacro:property name="WaistLeftActuatorFPGAFirmware" value="" />
+    <xacro:property name="WaistLeftActuatorFPGAFirmware" value="${TurboFPGAFirmwareURL}" />
 
     <xacro:property name="leftForearmProcessorFirmware" value=""/>
     <xacro:property name="leftForearmFPGAFirmware" value=""/>
