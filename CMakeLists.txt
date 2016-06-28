@@ -9,7 +9,6 @@ find_package(catkin REQUIRED COMPONENTS
   rospy 
   nasa_common_cmake 
   nasa_common_logging
-  nasa_val_embedded_utils
 )
 
 catkin_package(
