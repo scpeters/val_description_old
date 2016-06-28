@@ -10,7 +10,6 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <depend>xacro</depend>
-  <depend>rospy</depend>
   <depend>nasa_common_logging</depend>
 
   <export>
