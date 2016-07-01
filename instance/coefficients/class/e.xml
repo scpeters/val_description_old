@@ -10,7 +10,7 @@
     <Coeff id="JointMinValue" value="-3.1415"/>
     <Coeff id="Inductance_DAxis" value="0.0009"/>
     <Coeff id="Inductance_QAxis" value="0.00139"/>
-    <Coeff id="JointForceLimit_N" value="4500.0"/>
+    <Coeff id="JointForceLimit_N" value="10000.0"/>
     <Coeff id="JointOutputAPS_CountsToRad" value="0.00076699038"/>
     <Coeff id="JointRadToLinear" value="3141.59"/>
     <Coeff id="LoadCell_NPerCount" value="0.74"/>

@@ -6,8 +6,6 @@ project(val_description)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   xacro 
-  nasa_common_cmake 
-  nasa_common_logging
 )
 
 catkin_package(
