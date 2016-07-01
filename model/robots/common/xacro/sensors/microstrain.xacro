@@ -25,6 +25,7 @@
 
     <gazebo reference="${sensorName}_Frame">
       <sensor name="${sensorName}" type="imu">
+        <imuTransform>${origin_xyz} ${origin_rpy}</imuTransform>
         <always_on>true</always_on>
         <pose>0 0 0 0 0 0 </pose>
         <imu>
@@ -74,6 +75,7 @@
 
     <gazebo reference="${sensorName}_Frame">
       <sensor name="${sensorName}" type="imu">
+        <imuTransform>${origin_xyz} ${origin_rpy}</imuTransform>
         <always_on>true</always_on>
         <pose>0 0 0 0 0 0 </pose>
         <node name="${sensor_node}" />

@@ -11,6 +11,7 @@
 	<RobotInstance id="${instance}" />
 
 	<xacro:all_channels/>
+	<xacro:firmware_base_url/>
 
 	<Mechanisms>
 		<xacro:leg prefix="left" j1_serial_number="${leftLegJ1SerialNumber}" j2_serial_number="${leftLegJ2SerialNumber}" j3_serial_number="${leftLegJ3SerialNumber}" j4_serial_number="${leftLegJ4SerialNumber}" ankle_left_actuator_serial="${leftAnkleLeftActuatorSerialNumber}" ankle_right_actuator_serial="${leftAnkleRightActuatorSerialNumber}"/>
